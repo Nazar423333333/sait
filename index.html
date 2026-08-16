@@ -16,439 +16,175 @@
         content="NEON SPACE — сайт проєктів Nazar"
     >
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-
-    <!-- =========================================
+    <!-- =========================
          LOADER
-    ========================================== -->
+    ========================== -->
 
-    <div
-        id="loader"
-        style="
-            position: fixed;
-            inset: 0;
+    <div id="loader">
 
-            width: 100%;
-            height: 100vh;
-
-            z-index: 9999999;
-
-            display: flex;
-            flex-direction: column;
-
-            align-items: center;
-            justify-content: center;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    #101020,
-                    #020205 65%
-                );
-
-            transition:
-                opacity 0.5s ease;
-        "
-    >
-
-        <h1
-            style="
-                margin: 0;
-
-                font-family:
-                    Arial,
-                    sans-serif;
-
-                font-size:
-                    clamp(
-                        42px,
-                        7vw,
-                        85px
-                    );
-
-                font-weight: 900;
-
-                background:
-                    linear-gradient(
-                        90deg,
-                        #785cff,
-                        #00ddff,
-                        #ff4ac8
-                    );
-
-                -webkit-background-clip:
-                    text;
-
-                background-clip:
-                    text;
-
-                color:
-                    transparent;
-            "
-        >
+        <h1>
             NEON SPACE
         </h1>
 
-
-        <div
-            style="
-                width: min(400px, 80%);
-                height: 6px;
-
-                margin-top: 30px;
-
-                overflow: hidden;
-
-                border-radius: 50px;
-
-                background: #151520;
-            "
-        >
-
-            <div
-                id="loaderBar"
-                style="
-                    width: 0%;
-                    height: 100%;
-
-                    border-radius: inherit;
-
-                    background:
-                        linear-gradient(
-                            90deg,
-                            #7657ff,
-                            #00ddff,
-                            #ff4ac8
-                        );
-
-                    box-shadow:
-                        0 0 20px
-                        #7456ff;
-
-                    transition:
-                        width 1.8s ease;
-                "
-            ></div>
-
+        <div class="loader-line">
+            <div class="loader-progress"></div>
         </div>
 
-
-        <p
-            data-i18n="loading"
-            style="
-                margin-top: 17px;
-
-                color: #77778c;
-
-                font-family:
-                    Arial,
-                    sans-serif;
-
-                font-size: 10px;
-
-                font-weight: bold;
-
-                letter-spacing: 4px;
-            "
-        >
+        <p data-i18n="loading">
             ЗАПУСК СИСТЕМИ...
         </p>
 
     </div>
 
 
-    <!-- =========================================
-         LOADER SCRIPT
-         ПРАЦЮЄ НЕЗАЛЕЖНО ВІД script.js
-    ========================================== -->
-
+    <!-- ДОДАТКОВИЙ ЗАХИСТ LOADER -->
     <script>
+        setTimeout(function () {
+            const loader = document.getElementById("loader");
 
-        (function () {
+            if (loader) {
+                loader.style.opacity = "0";
+                loader.style.pointerEvents = "none";
 
-            const loader =
-                document.getElementById(
-                    "loader"
-                );
-
-            const loaderBar =
-                document.getElementById(
-                    "loaderBar"
-                );
-
-
-            // Запускаємо смугу
-            setTimeout(function () {
-
-                if (loaderBar) {
-
-                    loaderBar.style.width =
-                        "100%";
-
-                }
-
-            }, 50);
-
-
-            // Через 2 секунди ховаємо loader
-            setTimeout(function () {
-
-                if (!loader) {
-                    return;
-                }
-
-
-                loader.style.opacity =
-                    "0";
-
-                loader.style.pointerEvents =
-                    "none";
-
-
-                // Потім ПОВНІСТЮ видаляємо
                 setTimeout(function () {
-
                     if (loader) {
-
                         loader.remove();
-
                     }
-
-                }, 550);
-
-
-            }, 2000);
-
-
-            // Додатковий захист:
-            // максимум через 4 секунди
-            // loader точно видаляється
-            setTimeout(function () {
-
-                const oldLoader =
-                    document.getElementById(
-                        "loader"
-                    );
-
-                if (oldLoader) {
-
-                    oldLoader.remove();
-
-                }
-
-            }, 4000);
-
-        })();
-
+                }, 600);
+            }
+        }, 2200);
     </script>
 
 
-
-    <!-- =========================================
+    <!-- =========================
          STARS
-    ========================================== -->
+    ========================== -->
 
     <canvas id="stars"></canvas>
 
 
-
-    <!-- =========================================
-         CUSTOM CURSOR
-    ========================================== -->
+    <!-- =========================
+         CURSOR
+    ========================== -->
 
     <div class="cursor-dot"></div>
-
     <div class="cursor-circle"></div>
 
 
-
-    <!-- =========================================
+    <!-- =========================
          HEADER
-    ========================================== -->
+    ========================== -->
 
     <header class="header">
 
-
-        <!-- LOGO -->
-
-        <a
-            href="#home"
-            class="logo"
-        >
-
+        <a href="#home" class="logo">
             ◆ NEON<span>SPACE</span>
-
         </a>
 
 
-
-        <!-- MENU -->
-
         <nav id="nav">
 
-            <a
-                href="#home"
-                data-i18n="home"
-            >
+            <a href="#home" data-i18n="home">
                 Головна
             </a>
 
-
-            <a
-                href="#features"
-                data-i18n="features"
-            >
+            <a href="#features" data-i18n="features">
                 Можливості
             </a>
 
-
-            <a
-                href="#projects"
-                data-i18n="projects"
-            >
+            <a href="#projects" data-i18n="projects">
                 Проєкти
             </a>
 
-
-            <a
-                href="#profile"
-                data-i18n="profile"
-            >
+            <a href="#profile" data-i18n="profile">
                 Профіль
             </a>
 
         </nav>
 
 
-
-        <!-- RIGHT BUTTONS -->
-
         <div class="header-buttons">
 
-
-            <!-- LANGUAGE -->
-
+            <!-- LANGUAGES -->
             <select
                 id="languageSelect"
                 class="language-select"
                 aria-label="Language"
             >
-
-                <option value="uk">
-                    🇺🇦 UA
-                </option>
-
-                <option value="nl">
-                    🇳🇱 NL
-                </option>
-
-                <option value="en">
-                    🇬🇧 EN
-                </option>
-
-                <option value="pl">
-                    🇵🇱 PL
-                </option>
-
-                <option value="da">
-                    🇩🇰 DA
-                </option>
-
+                <option value="uk">🇺🇦 UA</option>
+                <option value="nl">🇳🇱 NL</option>
+                <option value="en">🇬🇧 EN</option>
+                <option value="pl">🇵🇱 PL</option>
+                <option value="da">🇩🇰 DA</option>
             </select>
 
 
-
             <!-- MUSIC -->
-
             <button
                 id="musicBtn"
                 type="button"
                 title="Music"
-                aria-label="Music"
             >
                 🎵
             </button>
 
 
-
             <!-- THEME -->
-
             <button
                 id="themeBtn"
                 type="button"
                 title="Theme"
-                aria-label="Theme"
             >
                 🌙
             </button>
 
 
-
             <!-- MOBILE MENU -->
-
             <button
                 id="menuBtn"
                 type="button"
                 title="Menu"
-                aria-label="Menu"
             >
                 ☰
             </button>
-
 
         </div>
 
     </header>
 
 
-
-    <!-- =========================================
+    <!-- =========================
          MAIN
-    ========================================== -->
+    ========================== -->
 
     <main>
 
 
-        <!-- =====================================
+        <!-- =====================
              HERO
-        ====================================== -->
+        ====================== -->
 
-        <section
-            class="hero"
-            id="home"
-        >
-
-
-            <!-- LEFT -->
+        <section class="hero" id="home">
 
             <div class="hero-content reveal">
-
 
                 <div
                     class="badge"
                     data-i18n="badge"
                 >
-
                     ✦ NAZAR DIGITAL EXPERIENCE
-
                 </div>
-
 
 
                 <h1>
 
                     <span data-i18n="welcome">
-
                         ЛАСКАВО
-
                     </span>
 
                     <br>
@@ -457,62 +193,53 @@
                         class="gradient-text"
                         data-i18n="welcomeNeon"
                     >
-
                         В NEON SPACE
-
                     </span>
 
                 </h1>
 
 
-
                 <p data-i18n="heroText">
-
                     Мій сучасний сайт із неоновим дизайном,
                     зоряним фоном, 3D-анімаціями,
                     музикою та моїми іграми й програмами.
-
                 </p>
 
 
-
-                <!-- BUTTONS -->
-
                 <div class="hero-buttons">
-
 
                     <a
                         href="#projects"
                         class="btn primary"
                         data-i18n="myProjects"
                     >
-
                         🚀 МОЇ ПРОЄКТИ
-
                     </a>
 
 
+                    <a
+                        href="https://www.facebook.com/profile.php?id=100089226251498"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn facebook-btn"
+                    >
+                        🔵 Facebook
+                    </a>
+
 
                     <button
-                        id="launchTop"
                         class="btn secondary"
+                        id="launchTop"
                         type="button"
                         data-i18n="launch"
                     >
-
                         ⚡ ЗАПУСТИТИ
-
                     </button>
-
 
                 </div>
 
 
-
-                <!-- STATS -->
-
                 <div class="stats">
-
 
                     <div>
 
@@ -521,13 +248,10 @@
                         </strong>
 
                         <span data-i18n="projectsCount">
-
                             МОЇ ПРОЄКТИ
-
                         </span>
 
                     </div>
-
 
 
                     <div>
@@ -543,7 +267,6 @@
                     </div>
 
 
-
                     <div>
 
                         <strong data-target="24">
@@ -556,428 +279,271 @@
 
                     </div>
 
-
                 </div>
-
 
             </div>
 
 
-
-            <!-- =====================================
+            <!-- =====================
                  SYSTEM CARD
-            ====================================== -->
+            ====================== -->
 
             <div
                 class="system-card reveal"
                 id="systemCard"
             >
 
-
                 <div class="window-bar">
 
-
                     <div>
-
                         <span class="dot red"></span>
-
                         <span class="dot yellow"></span>
-
                         <span class="dot green"></span>
-
                     </div>
 
-
                     <span class="window-title">
-
                         NAZAR CORE
-
                     </span>
-
 
                 </div>
 
-
-
-                <!-- CORE -->
 
                 <div class="core">
 
-
                     <div class="orbit orbit1"></div>
-
                     <div class="orbit orbit2"></div>
-
                     <div class="orbit orbit3"></div>
 
-
                     <div class="core-ball">
-
                         N
-
                     </div>
-
 
                 </div>
 
 
-
-                <!-- CORE INFO -->
-
                 <div class="system-info">
-
 
                     <div>
 
                         <span data-i18n="status">
-
                             СТАТУС
-
                         </span>
-
 
                         <strong
                             class="online"
                             data-i18n="online"
                         >
-
                             ОНЛАЙН
-
                         </strong>
 
                     </div>
-
 
 
                     <div>
 
                         <span data-i18n="corePower">
-
                             ПОТУЖНІСТЬ ЯДРА
-
                         </span>
 
-
                         <strong>
-
                             99%
-
                         </strong>
 
                     </div>
 
 
-
                     <div class="progress">
-
                         <div class="progress-fill"></div>
-
                     </div>
-
 
                 </div>
 
-
             </div>
-
 
         </section>
 
 
-
-        <!-- =====================================
+        <!-- =====================
              FEATURES
-        ====================================== -->
+        ====================== -->
 
         <section
             class="section"
             id="features"
         >
 
-
             <div class="section-title reveal">
 
-
                 <span data-i18n="featuresLabel">
-
                     МОЖЛИВОСТІ
-
                 </span>
-
 
 
                 <h2>
 
                     <span data-i18n="newSite">
-
                         Сайт нового
-
                     </span>
 
                     <span
                         class="gradient-text"
                         data-i18n="generation"
                     >
-
                         покоління
-
                     </span>
 
                 </h2>
 
 
-
                 <p data-i18n="featuresDescription">
-
                     Неоновий дизайн, анімації,
-                    музика та мої проєкти
-                    в одному місці.
-
+                    музика та мої проєкти в одному місці.
                 </p>
 
-
             </div>
-
 
 
             <div class="feature-grid">
 
-
-                <!-- SPEED -->
-
                 <div class="feature reveal">
 
-
                     <div class="feature-icon">
-
                         ⚡
-
                     </div>
 
-
                     <h3>
-
                         Ultra Speed
-
                     </h3>
-
 
                     <p data-i18n="speedText">
-
-                        Швидкий сайт із плавними
-                        переходами та ефектами.
-
+                        Швидкий сайт із плавними переходами та ефектами.
                     </p>
-
 
                 </div>
 
 
-
-                <!-- SPACE -->
-
                 <div class="feature reveal">
 
-
                     <div class="feature-icon">
-
                         🌌
-
                     </div>
 
-
                     <h3>
-
                         Space Design
-
                     </h3>
-
 
                     <p data-i18n="spaceText">
-
-                        Живий зоряний фон,
-                        неонові кольори
-                        та космічний дизайн.
-
+                        Живий зоряний фон, неонові кольори та космічний дизайн.
                     </p>
-
 
                 </div>
 
 
-
-                <!-- RESPONSIVE -->
-
                 <div class="feature reveal">
 
-
                     <div class="feature-icon">
-
                         📱
-
                     </div>
 
-
                     <h3>
-
                         Responsive
-
                     </h3>
-
 
                     <p data-i18n="responsiveText">
-
-                        Сайт працює
-                        на комп'ютері,
-                        телефоні та планшеті.
-
+                        Сайт працює на комп'ютері, телефоні та планшеті.
                     </p>
-
 
                 </div>
 
-
-
-                <!-- MUSIC -->
 
                 <div class="feature reveal">
 
-
                     <div class="feature-icon">
-
                         🎵
-
                     </div>
 
-
                     <h3>
-
                         Music
-
                     </h3>
 
-
                     <p data-i18n="musicText">
-
-                        Фонова музика
-                        та керування звуком.
-
+                        Фонова музика та зручне керування звуком.
                     </p>
-
 
                 </div>
 
-
             </div>
-
 
         </section>
 
 
-
-        <!-- =====================================
+        <!-- =====================
              PROJECTS
-        ====================================== -->
+        ====================== -->
 
         <section
             class="section"
             id="projects"
         >
 
-
             <div class="section-title reveal">
 
-
                 <span data-i18n="mySites">
-
                     МОЇ САЙТИ
-
                 </span>
-
 
 
                 <h2>
 
                     <span data-i18n="myWord">
-
                         Мої
-
                     </span>
 
                     <span
                         class="gradient-text"
                         data-i18n="projectsWord"
                     >
-
                         проєкти
-
                     </span>
 
                 </h2>
 
 
-
                 <p data-i18n="projectsDescription">
-
-                    Натискай кнопку
-                    та відкривай потрібний проєкт.
-
+                    Натискай кнопку та відкривай потрібний проєкт.
                 </p>
 
-
             </div>
-
 
 
             <div class="projects-grid">
 
 
-                <!-- =================================
-                     FNAF
-                ================================== -->
+                <!-- FNAF -->
 
                 <article class="project reveal">
 
-
                     <div class="project-image fnaf-image">
-
-                        <span>
-
-                            👻
-
-                        </span>
-
+                        <span>👻</span>
                     </div>
-
 
 
                     <div class="project-content">
 
-
                         <div class="project-tag">
-
                             🎮 GAME
-
                         </div>
 
 
-
                         <h3 data-i18n="fnafTitle">
-
                             П'ЯТЬ НОЧЕЙ В АТБ
-
                         </h3>
 
 
-
                         <p data-i18n="fnafDescription">
-
                             Моя FNAF-подібна гра,
-                            яку можна запускати
-                            прямо у браузері.
-
+                            яку можна запускати прямо у браузері.
                         </p>
-
 
 
                         <a
@@ -988,73 +554,42 @@
                         >
 
                             <span data-i18n="playNow">
-
                                 🎮 ГРАТИ ЗАРАЗ
-
                             </span>
 
-                            <b>
-
-                                →
-
-                            </b>
+                            <b>→</b>
 
                         </a>
 
-
                     </div>
-
 
                 </article>
 
 
-
-                <!-- =================================
-                     OPTIMIZER
-                ================================== -->
+                <!-- OPTIMIZER -->
 
                 <article class="project reveal">
 
-
                     <div class="project-image optimizer-image">
-
-                        <span>
-
-                            🚀
-
-                        </span>
-
+                        <span>🚀</span>
                     </div>
-
 
 
                     <div class="project-content">
 
-
                         <div class="project-tag">
-
                             🖥️ WINDOWS
-
                         </div>
 
 
-
                         <h3>
-
                             Windows Optimizer
-
                         </h3>
 
 
-
                         <p data-i18n="optimizerDescription">
-
-                            Сторінка мого
-                            Windows Optimizer
-                            для Windows.
-
+                            Сторінка мого Windows Optimizer для Windows.
                         </p>
-
 
 
                         <a
@@ -1065,73 +600,43 @@
                         >
 
                             <span data-i18n="openProject">
-
                                 🚀 ВІДКРИТИ
-
                             </span>
 
-                            <b>
-
-                                →
-
-                            </b>
+                            <b>→</b>
 
                         </a>
 
-
                     </div>
-
 
                 </article>
 
 
-
-                <!-- =================================
-                     SUPER GAME
-                ================================== -->
+                <!-- GAME -->
 
                 <article class="project reveal">
 
-
                     <div class="project-image game-image">
-
-                        <span>
-
-                            🎮
-
-                        </span>
-
+                        <span>🎮</span>
                     </div>
-
 
 
                     <div class="project-content">
 
-
                         <div class="project-tag">
-
                             ⚡ ONLINE GAME
-
                         </div>
 
 
-
                         <h3 data-i18n="superGame">
-
                             SUPER GAME НАЗАРА
-
                         </h3>
 
 
-
                         <p data-i18n="gameDescription">
-
                             Моя браузерна гра
-                            з ігровими функціями
-                            та системою прогресу.
-
+                            з ігровими функціями та системою прогресу.
                         </p>
-
 
 
                         <a
@@ -1142,290 +647,195 @@
                         >
 
                             <span data-i18n="startGame">
-
                                 ⚡ ЗАПУСТИТИ ГРУ
-
                             </span>
 
-                            <b>
-
-                                →
-
-                            </b>
+                            <b>→</b>
 
                         </a>
 
-
                     </div>
-
 
                 </article>
 
-
             </div>
-
 
         </section>
 
 
-
-        <!-- =====================================
+        <!-- =====================
              PROFILE
-        ====================================== -->
+        ====================== -->
 
         <section
             class="section"
             id="profile"
         >
 
-
             <div class="profile reveal">
 
-
                 <div class="avatar">
-
                     N
-
                 </div>
-
 
 
                 <div class="profile-info">
 
-
                     <span data-i18n="creatorProfile">
-
                         ПРОФІЛЬ АВТОРА
-
                     </span>
 
 
-
                     <h2>
-
                         Nazar
-
                     </h2>
 
 
-
                     <p data-i18n="creatorDescription">
-
                         Web Developer • Game Creator • PC Enthusiast
-
                     </p>
-
 
 
                     <div class="profile-online">
 
-
                         <span class="online-dot"></span>
 
-
                         <span data-i18n="online">
-
                             ОНЛАЙН
-
                         </span>
 
-
                     </div>
-
 
                 </div>
 
 
+                <div class="profile-buttons">
 
-                <a
-                    href="#projects"
-                    class="btn primary"
-                    data-i18n="myProjects"
-                >
+                    <a
+                        href="#projects"
+                        class="btn primary"
+                        data-i18n="myProjects"
+                    >
+                        🚀 МОЇ ПРОЄКТИ
+                    </a>
 
-                    🚀 МОЇ ПРОЄКТИ
 
-                </a>
+                    <a
+                        href="https://www.facebook.com/profile.php?id=100089226251498"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn facebook-btn"
+                    >
+                        🔵 Facebook
+                    </a>
 
+                </div>
 
             </div>
-
 
         </section>
 
 
-
-        <!-- =====================================
-             LAUNCH SECTION
-        ====================================== -->
+        <!-- =====================
+             LAUNCH
+        ====================== -->
 
         <section class="section">
 
-
             <div class="launch-box reveal">
 
-
                 <span class="launch-label">
-
                     NEON SYSTEM
-
                 </span>
 
 
-
                 <h2 data-i18n="ready">
-
                     Готовий до запуску?
-
                 </h2>
 
 
-
                 <p data-i18n="activate">
-
                     Активуй систему NEON SPACE.
-
                 </p>
-
 
 
                 <button
                     id="launchBtn"
-                    type="button"
                     class="btn primary"
+                    type="button"
                     data-i18n="launchButton"
                 >
-
                     🚀 ЗАПУСТИТИ
-
                 </button>
-
 
 
                 <div
                     id="launchMessage"
                     data-i18n="systemOnline"
                 >
-
                     ✅ СИСТЕМА ОНЛАЙН
-
                 </div>
-
 
             </div>
 
-
         </section>
-
 
     </main>
 
 
-
-    <!-- =========================================
+    <!-- =========================
          FOOTER
-    ========================================== -->
+    ========================== -->
 
     <footer>
 
-
         <strong>
-
             ◆ NEON SPACE
-
         </strong>
 
 
-        <span data-i18n="footer">
+        <div class="footer-right">
 
-            Створено Nazar • © 2026
+            <a
+                href="https://www.facebook.com/profile.php?id=100089226251498"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-facebook"
+            >
+                🔵 Facebook
+            </a>
 
-        </span>
 
+            <span data-i18n="footer">
+                Створено Nazar • © 2026
+            </span>
+
+        </div>
 
     </footer>
 
 
-
-    <!-- =========================================
+    <!-- =========================
          MUSIC
-    ========================================== -->
+    ========================== -->
 
     <audio
         id="music"
         loop
         preload="auto"
     >
-
         <source
             src="music.mp3"
             type="audio/mpeg"
         >
-
     </audio>
 
 
-
-    <!-- =========================================
-         MAIN JAVASCRIPT
-    ========================================== -->
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
 
     <script src="script.js"></script>
 
-
-
-    <!-- =========================================
-         ФІНАЛЬНИЙ ЗАХИСТ ВІД ЗАВИСАННЯ LOADER
-    ========================================== -->
-
-    <script>
-
-        window.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-                setTimeout(
-                    function () {
-
-                        const loader =
-                            document.getElementById(
-                                "loader"
-                            );
-
-                        if (loader) {
-
-                            loader.style.opacity =
-                                "0";
-
-                            loader.style.pointerEvents =
-                                "none";
-
-
-                            setTimeout(
-                                function () {
-
-                                    if (loader) {
-
-                                        loader.remove();
-
-                                    }
-
-                                },
-                                500
-                            );
-
-                        }
-
-                    },
-                    2200
-                );
-
-            }
-        );
-
-    </script>
-
-
 </body>
-
 </html>
