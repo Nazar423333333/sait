@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
-/* =========================================
+
+/* =========================
    RESET
-========================================= */
+========================= */
 
 * {
     margin: 0;
@@ -10,9 +11,11 @@
     box-sizing: border-box;
 }
 
+
 html {
     scroll-behavior: smooth;
 }
+
 
 :root {
     --bg: #05050b;
@@ -27,14 +30,16 @@ html {
     --pink: #ff4fc8;
 }
 
+
 body.light {
     --bg: #eef0ff;
     --panel: rgba(255, 255, 255, 0.82);
-    --panel-hover: rgba(255, 255, 255, 0.95);
+    --panel-hover: rgba(255, 255, 255, 0.96);
     --text: #101020;
     --muted: #606070;
     --border: rgba(0, 0, 0, 0.12);
 }
+
 
 body {
     min-height: 100vh;
@@ -62,17 +67,14 @@ body {
 }
 
 
-/* =========================================
+/* =========================
    LOADER
-========================================= */
+========================= */
 
 #loader {
     position: fixed;
 
     inset: 0;
-
-    width: 100%;
-    height: 100vh;
 
     z-index: 999999;
 
@@ -89,11 +91,11 @@ body {
             #020205 65%
         );
 
-    /* ГОЛОВНЕ:
-       loader сам зникне навіть без JS */
-    animation:
-        forceHideLoader 0.65s ease 2.2s forwards;
+    transition:
+        opacity 0.6s,
+        visibility 0.6s;
 }
+
 
 #loader.hide {
     opacity: 0;
@@ -101,8 +103,6 @@ body {
     pointer-events: none;
 }
 
-
-/* НЕОН ЛОГО */
 
 #loader h1 {
     font-size:
@@ -137,8 +137,6 @@ body {
 }
 
 
-/* LOADER LINE */
-
 .loader-line {
     width:
         min(
@@ -155,11 +153,8 @@ body {
     border-radius: 30px;
 
     background: #141420;
-
-    box-shadow:
-        inset 0 0 10px
-        rgba(0, 0, 0, 0.6);
 }
+
 
 .loader-progress {
     width: 0;
@@ -183,6 +178,7 @@ body {
         loaderProgress 2s ease forwards;
 }
 
+
 #loader p {
     margin-top: 16px;
 
@@ -195,48 +191,23 @@ body {
 }
 
 
-/* LOADER ANIMATIONS */
-
 @keyframes loaderGradient {
     to {
         background-position: 300%;
     }
 }
 
-@keyframes loaderProgress {
-    from {
-        width: 0;
-    }
 
+@keyframes loaderProgress {
     to {
         width: 100%;
     }
 }
 
-@keyframes forceHideLoader {
-    0% {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-    }
 
-    99% {
-        opacity: 0;
-        visibility: visible;
-        pointer-events: none;
-    }
-
-    100% {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
-}
-
-
-/* =========================================
-   STAR BACKGROUND
-========================================= */
+/* =========================
+   STARS
+========================= */
 
 #stars {
     position: fixed;
@@ -252,9 +223,9 @@ body {
 }
 
 
-/* =========================================
-   CUSTOM CURSOR
-========================================= */
+/* =========================
+   CURSOR
+========================= */
 
 .cursor-dot,
 .cursor-circle {
@@ -273,6 +244,7 @@ body {
         translate(-50%, -50%);
 }
 
+
 .cursor-dot {
     width: 7px;
     height: 7px;
@@ -284,6 +256,7 @@ body {
         0 0 30px #7456ff;
 }
 
+
 .cursor-circle {
     width: 38px;
     height: 38px;
@@ -291,16 +264,12 @@ body {
     border:
         1px solid
         rgba(150, 120, 255, 0.65);
-
-    transition:
-        width 0.2s,
-        height 0.2s;
 }
 
 
-/* =========================================
+/* =========================
    HEADER
-========================================= */
+========================= */
 
 .header {
     position: fixed;
@@ -352,23 +321,21 @@ body {
 }
 
 
-/* =========================================
+/* =========================
    LOGO
-========================================= */
+========================= */
 
 .logo {
     flex-shrink: 0;
 
-    color:
-        var(--text);
+    color: var(--text);
 
     text-decoration: none;
 
     font-size: 20px;
     font-weight: 900;
-
-    letter-spacing: 0.5px;
 }
+
 
 .logo span {
     color: #8369ff;
@@ -379,9 +346,9 @@ body {
 }
 
 
-/* =========================================
-   NAV
-========================================= */
+/* =========================
+   NAVIGATION
+========================= */
 
 nav {
     display: flex;
@@ -391,11 +358,11 @@ nav {
     gap: 26px;
 }
 
+
 nav a {
     position: relative;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
     text-decoration: none;
 
@@ -405,10 +372,11 @@ nav a {
     transition: 0.3s;
 }
 
+
 nav a:hover {
-    color:
-        var(--text);
+    color: var(--text);
 }
+
 
 nav a::after {
     content: "";
@@ -433,14 +401,15 @@ nav a::after {
     transition: 0.3s;
 }
 
+
 nav a:hover::after {
     width: 100%;
 }
 
 
-/* =========================================
+/* =========================
    HEADER BUTTONS
-========================================= */
+========================= */
 
 .header-buttons {
     display: flex;
@@ -449,6 +418,7 @@ nav a:hover::after {
 
     gap: 7px;
 }
+
 
 .header-buttons button {
     flex-shrink: 0;
@@ -470,8 +440,7 @@ nav a:hover::after {
     background:
         rgba(255, 255, 255, 0.04);
 
-    color:
-        var(--text);
+    color: var(--text);
 
     font-size: 17px;
 
@@ -480,25 +449,24 @@ nav a:hover::after {
     transition: 0.3s;
 }
 
+
 .header-buttons button:hover {
     transform:
         translateY(-3px);
 
     background:
         rgba(120, 90, 255, 0.15);
-
-    border-color:
-        rgba(130, 100, 255, 0.45);
 }
+
 
 #menuBtn {
     display: none;
 }
 
 
-/* =========================================
-   LANGUAGE SELECT
-========================================= */
+/* =========================
+   LANGUAGE
+========================= */
 
 .language-select {
     height: 42px;
@@ -517,40 +485,28 @@ nav a:hover::after {
     background:
         rgba(255, 255, 255, 0.05);
 
-    color:
-        var(--text);
+    color: var(--text);
 
     font-family:
-        "Inter",
-        Arial,
-        sans-serif;
+        inherit;
 
     font-size: 12px;
     font-weight: 800;
 
     cursor: pointer;
-
-    transition: 0.3s;
 }
 
-.language-select:hover {
-    border-color:
-        rgba(130, 100, 255, 0.5);
-
-    background:
-        rgba(120, 90, 255, 0.14);
-}
 
 .language-select option {
-    background: #10101c;
-
     color: white;
+
+    background: #10101c;
 }
 
 
-/* =========================================
+/* =========================
    HERO
-========================================= */
+========================= */
 
 .hero {
     width:
@@ -575,6 +531,7 @@ nav a:hover::after {
     padding-top: 130px;
     padding-bottom: 80px;
 }
+
 
 .badge {
     display: inline-block;
@@ -601,6 +558,7 @@ nav a:hover::after {
     letter-spacing: 3px;
 }
 
+
 .hero h1 {
     font-size:
         clamp(
@@ -616,10 +574,6 @@ nav a:hover::after {
     font-weight: 900;
 }
 
-
-/* =========================================
-   GRADIENT TEXT
-========================================= */
 
 .gradient-text {
     background:
@@ -642,24 +596,26 @@ nav a:hover::after {
         gradientMove 6s linear infinite;
 }
 
+
 @keyframes gradientMove {
     to {
         background-position: 300%;
     }
 }
 
+
 .hero-content p {
     max-width: 610px;
 
     margin-top: 28px;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
     font-size: 16px;
 
     line-height: 1.8;
 }
+
 
 .hero-buttons {
     display: flex;
@@ -672,9 +628,9 @@ nav a:hover::after {
 }
 
 
-/* =========================================
+/* =========================
    BUTTONS
-========================================= */
+========================= */
 
 .btn {
     min-height: 52px;
@@ -702,16 +658,15 @@ nav a:hover::after {
 
     cursor: pointer;
 
-    transition:
-        transform 0.3s,
-        box-shadow 0.3s,
-        background 0.3s;
+    transition: 0.3s;
 }
+
 
 .btn:hover {
     transform:
         translateY(-4px);
 }
+
 
 .primary {
     background:
@@ -726,11 +681,13 @@ nav a:hover::after {
         rgba(100, 70, 255, 0.3);
 }
 
+
 .primary:hover {
     box-shadow:
         0 18px 45px
         rgba(100, 70, 255, 0.55);
 }
+
 
 .secondary {
     background:
@@ -745,9 +702,34 @@ nav a:hover::after {
 }
 
 
-/* =========================================
+/* =========================
+   FACEBOOK BUTTON
+========================= */
+
+.facebook-btn {
+    background:
+        linear-gradient(
+            135deg,
+            #1877f2,
+            #0d5fd7
+        );
+
+    box-shadow:
+        0 15px 35px
+        rgba(24, 119, 242, 0.28);
+}
+
+
+.facebook-btn:hover {
+    box-shadow:
+        0 18px 45px
+        rgba(24, 119, 242, 0.5);
+}
+
+
+/* =========================
    STATS
-========================================= */
+========================= */
 
 .stats {
     display: flex;
@@ -757,21 +739,23 @@ nav a:hover::after {
     margin-top: 50px;
 }
 
+
 .stats div {
     display: flex;
 
     flex-direction: column;
 }
 
+
 .stats strong {
     font-size: 27px;
 }
 
+
 .stats span {
     margin-top: 5px;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
     font-size: 10px;
 
@@ -779,9 +763,9 @@ nav a:hover::after {
 }
 
 
-/* =========================================
+/* =========================
    SYSTEM CARD
-========================================= */
+========================= */
 
 .system-card {
     padding: 18px;
@@ -802,9 +786,6 @@ nav a:hover::after {
     backdrop-filter:
         blur(25px);
 
-    -webkit-backdrop-filter:
-        blur(25px);
-
     box-shadow:
         0 40px 90px
         rgba(0, 0, 0, 0.45);
@@ -813,10 +794,6 @@ nav a:hover::after {
         transform 0.15s;
 }
 
-
-/* =========================================
-   WINDOW BAR
-========================================= */
 
 .window-bar {
     height: 40px;
@@ -831,6 +808,7 @@ nav a:hover::after {
         var(--border);
 }
 
+
 .dot {
     display: inline-block;
 
@@ -842,21 +820,24 @@ nav a:hover::after {
     border-radius: 50%;
 }
 
+
 .red {
     background: #ff5e57;
 }
+
 
 .yellow {
     background: #ffc13c;
 }
 
+
 .green {
     background: #2ed358;
 }
 
+
 .window-title {
-    color:
-        var(--muted);
+    color: var(--muted);
 
     font-size: 9px;
 
@@ -864,9 +845,9 @@ nav a:hover::after {
 }
 
 
-/* =========================================
+/* =========================
    CORE
-========================================= */
+========================= */
 
 .core {
     position: relative;
@@ -880,6 +861,7 @@ nav a:hover::after {
 
     overflow: hidden;
 }
+
 
 .core-ball {
     position: absolute;
@@ -915,6 +897,7 @@ nav a:hover::after {
         corePulse 3s ease-in-out infinite;
 }
 
+
 @keyframes corePulse {
     50% {
         transform:
@@ -927,10 +910,6 @@ nav a:hover::after {
 }
 
 
-/* =========================================
-   ORBITS
-========================================= */
-
 .orbit {
     position: absolute;
 
@@ -941,6 +920,7 @@ nav a:hover::after {
     border-radius: 50%;
 }
 
+
 .orbit1 {
     width: 190px;
     height: 80px;
@@ -948,6 +928,7 @@ nav a:hover::after {
     animation:
         orbit1 7s linear infinite;
 }
+
 
 .orbit2 {
     width: 230px;
@@ -957,6 +938,7 @@ nav a:hover::after {
         orbit2 9s linear infinite;
 }
 
+
 .orbit3 {
     width: 160px;
     height: 240px;
@@ -965,50 +947,44 @@ nav a:hover::after {
         orbit3 11s linear infinite;
 }
 
+
 @keyframes orbit1 {
     from {
-        transform:
-            rotate(20deg);
+        transform: rotate(20deg);
     }
 
     to {
-        transform:
-            rotate(380deg);
+        transform: rotate(380deg);
     }
 }
+
 
 @keyframes orbit2 {
     from {
-        transform:
-            rotate(-40deg);
+        transform: rotate(-40deg);
     }
 
     to {
-        transform:
-            rotate(320deg);
+        transform: rotate(320deg);
     }
 }
+
 
 @keyframes orbit3 {
-    from {
-        transform:
-            rotate(0deg);
-    }
-
     to {
-        transform:
-            rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 
 
-/* =========================================
+/* =========================
    SYSTEM INFO
-========================================= */
+========================= */
 
 .system-info {
     padding: 10px;
 }
+
 
 .system-info > div:not(.progress) {
     display: flex;
@@ -1018,15 +994,16 @@ nav a:hover::after {
     margin:
         10px 0;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
     font-size: 11px;
 }
 
+
 .online {
     color: #4cff9d;
 }
+
 
 .progress {
     height: 7px;
@@ -1040,6 +1017,7 @@ nav a:hover::after {
     background:
         rgba(255, 255, 255, 0.06);
 }
+
 
 .progress-fill {
     width: 99%;
@@ -1059,9 +1037,9 @@ nav a:hover::after {
 }
 
 
-/* =========================================
+/* =========================
    SECTIONS
-========================================= */
+========================= */
 
 .section {
     width:
@@ -1076,6 +1054,7 @@ nav a:hover::after {
         110px 0;
 }
 
+
 .section-title {
     max-width: 720px;
 
@@ -1085,6 +1064,7 @@ nav a:hover::after {
     text-align: center;
 }
 
+
 .section-title > span {
     color: #886fff;
 
@@ -1093,6 +1073,7 @@ nav a:hover::after {
 
     letter-spacing: 3px;
 }
+
 
 .section-title h2 {
     margin-top: 15px;
@@ -1105,19 +1086,19 @@ nav a:hover::after {
         );
 }
 
+
 .section-title p {
     margin-top: 18px;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
     line-height: 1.7;
 }
 
 
-/* =========================================
+/* =========================
    FEATURES
-========================================= */
+========================= */
 
 .feature-grid {
     display: grid;
@@ -1127,6 +1108,7 @@ nav a:hover::after {
 
     gap: 18px;
 }
+
 
 .feature {
     min-height: 250px;
@@ -1148,6 +1130,7 @@ nav a:hover::after {
     transition: 0.4s;
 }
 
+
 .feature:hover {
     transform:
         translateY(-10px);
@@ -1157,11 +1140,8 @@ nav a:hover::after {
 
     background:
         var(--panel-hover);
-
-    box-shadow:
-        0 30px 60px
-        rgba(0, 0, 0, 0.25);
 }
+
 
 .feature-icon {
     width: 55px;
@@ -1182,13 +1162,14 @@ nav a:hover::after {
     font-size: 25px;
 }
 
+
 .feature h3 {
     margin-bottom: 12px;
 }
 
+
 .feature p {
-    color:
-        var(--muted);
+    color: var(--muted);
 
     font-size: 13px;
 
@@ -1196,9 +1177,9 @@ nav a:hover::after {
 }
 
 
-/* =========================================
+/* =========================
    PROJECTS
-========================================= */
+========================= */
 
 .projects-grid {
     display: grid;
@@ -1208,6 +1189,7 @@ nav a:hover::after {
 
     gap: 22px;
 }
+
 
 .project {
     overflow: hidden;
@@ -1221,14 +1203,9 @@ nav a:hover::after {
     background:
         var(--panel);
 
-    backdrop-filter:
-        blur(20px);
-
-    transition:
-        transform 0.4s,
-        border-color 0.4s,
-        box-shadow 0.4s;
+    transition: 0.4s;
 }
+
 
 .project:hover {
     transform:
@@ -1242,6 +1219,7 @@ nav a:hover::after {
         rgba(0, 0, 0, 0.32);
 }
 
+
 .project-image {
     height: 230px;
 
@@ -1253,9 +1231,11 @@ nav a:hover::after {
     font-size: 80px;
 }
 
+
 .project-image span {
     transition: 0.4s;
 }
+
 
 .project:hover
 .project-image span {
@@ -1263,6 +1243,7 @@ nav a:hover::after {
         scale(1.15)
         rotate(-5deg);
 }
+
 
 .fnaf-image {
     background:
@@ -1273,6 +1254,7 @@ nav a:hover::after {
         );
 }
 
+
 .optimizer-image {
     background:
         radial-gradient(
@@ -1281,6 +1263,7 @@ nav a:hover::after {
             #061326 75%
         );
 }
+
 
 .game-image {
     background:
@@ -1291,9 +1274,11 @@ nav a:hover::after {
         );
 }
 
+
 .project-content {
     padding: 27px;
 }
+
 
 .project-tag {
     display: inline-block;
@@ -1320,11 +1305,13 @@ nav a:hover::after {
     letter-spacing: 1px;
 }
 
+
 .project-content h3 {
     font-size: 20px;
 
     line-height: 1.3;
 }
+
 
 .project-content p {
     min-height: 70px;
@@ -1332,18 +1319,13 @@ nav a:hover::after {
     margin:
         13px 0 24px;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
     font-size: 13px;
 
     line-height: 1.7;
 }
 
-
-/* =========================================
-   PROJECT BUTTON
-========================================= */
 
 .project-btn {
     width: 100%;
@@ -1382,6 +1364,7 @@ nav a:hover::after {
     transition: 0.3s;
 }
 
+
 .project-btn:hover {
     transform:
         translateY(-3px);
@@ -1391,21 +1374,10 @@ nav a:hover::after {
         rgba(100, 70, 255, 0.5);
 }
 
-.project-btn b {
-    font-size: 18px;
 
-    transition: 0.3s;
-}
-
-.project-btn:hover b {
-    transform:
-        translateX(5px);
-}
-
-
-/* =========================================
+/* =========================
    PROFILE
-========================================= */
+========================= */
 
 .profile {
     display: flex;
@@ -1428,6 +1400,7 @@ nav a:hover::after {
     backdrop-filter:
         blur(20px);
 }
+
 
 .avatar {
     flex-shrink: 0;
@@ -1457,9 +1430,11 @@ nav a:hover::after {
         rgba(100, 80, 255, 0.4);
 }
 
+
 .profile-info {
     flex: 1;
 }
+
 
 .profile-info > span {
     color: #886fff;
@@ -1470,6 +1445,7 @@ nav a:hover::after {
     letter-spacing: 3px;
 }
 
+
 .profile-info h2 {
     margin:
         8px 0;
@@ -1477,10 +1453,11 @@ nav a:hover::after {
     font-size: 35px;
 }
 
+
 .profile-info p {
-    color:
-        var(--muted);
+    color: var(--muted);
 }
+
 
 .profile-online {
     display: flex;
@@ -1497,11 +1474,10 @@ nav a:hover::after {
     font-weight: 700;
 }
 
+
 .online-dot {
     width: 8px;
     height: 8px;
-
-    display: inline-block;
 
     border-radius: 50%;
 
@@ -1512,9 +1488,18 @@ nav a:hover::after {
 }
 
 
-/* =========================================
+.profile-buttons {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* =========================
    LAUNCH
-========================================= */
+========================= */
 
 .launch-box {
     padding:
@@ -1536,6 +1521,7 @@ nav a:hover::after {
         );
 }
 
+
 .launch-label {
     color: #8c73ff;
 
@@ -1544,6 +1530,7 @@ nav a:hover::after {
 
     letter-spacing: 3px;
 }
+
 
 .launch-box h2 {
     margin-top: 15px;
@@ -1556,13 +1543,14 @@ nav a:hover::after {
         );
 }
 
+
 .launch-box p {
     margin:
         15px 0 30px;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 }
+
 
 #launchMessage {
     margin-top: 25px;
@@ -1572,8 +1560,6 @@ nav a:hover::after {
     font-size: 15px;
     font-weight: 900;
 
-    letter-spacing: 2px;
-
     opacity: 0;
 
     transform:
@@ -1581,6 +1567,7 @@ nav a:hover::after {
 
     transition: 0.5s;
 }
+
 
 #launchMessage.show {
     opacity: 1;
@@ -1590,9 +1577,9 @@ nav a:hover::after {
 }
 
 
-/* =========================================
+/* =========================
    FOOTER
-========================================= */
+========================= */
 
 footer {
     width:
@@ -1608,6 +1595,7 @@ footer {
 
     display: flex;
 
+    align-items: center;
     justify-content: space-between;
 
     gap: 20px;
@@ -1616,16 +1604,43 @@ footer {
         1px solid
         var(--border);
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
     font-size: 12px;
 }
 
 
-/* =========================================
+.footer-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.footer-facebook {
+    color: #5da0ff;
+
+    text-decoration: none;
+
+    font-weight: 800;
+
+    transition: 0.3s;
+}
+
+
+.footer-facebook:hover {
+    color: #ffffff;
+
+    text-shadow:
+        0 0 15px #1877f2;
+}
+
+
+/* =========================
    REVEAL
-========================================= */
+========================= */
 
 .reveal {
     opacity: 0;
@@ -1638,6 +1653,7 @@ footer {
         transform 0.8s;
 }
 
+
 .reveal.active {
     opacity: 1;
 
@@ -1646,55 +1662,31 @@ footer {
 }
 
 
-/* =========================================
+/* =========================
    TABLET
-========================================= */
+========================= */
 
-@media
-(max-width: 1050px) {
-
-    nav {
-        gap: 15px;
-    }
-
-    nav a {
-        font-size: 11px;
-    }
-
-    .language-select {
-        width: 66px;
-
-        padding:
-            0 5px;
-    }
-}
-
-
-/* =========================================
-   TABLET SMALL
-========================================= */
-
-@media
-(max-width: 900px) {
+@media (max-width: 1000px) {
 
     .hero {
         grid-template-columns:
             1fr;
 
         text-align: center;
-
-        gap: 55px;
     }
+
 
     .hero-content p {
         margin-left: auto;
         margin-right: auto;
     }
 
+
     .hero-buttons,
     .stats {
         justify-content: center;
     }
+
 
     .system-card {
         width:
@@ -1706,36 +1698,41 @@ footer {
         margin: auto;
     }
 
+
     .feature-grid {
         grid-template-columns:
             repeat(2, 1fr);
     }
+
 
     .projects-grid {
         grid-template-columns:
             1fr;
     }
 
+
     .project {
-        width: 100%;
         max-width: 600px;
+
+        width: 100%;
 
         margin: auto;
     }
+
 }
 
 
-/* =========================================
+/* =========================
    MOBILE
-========================================= */
+========================= */
 
-@media
-(max-width: 760px) {
+@media (max-width: 760px) {
 
     .cursor-dot,
     .cursor-circle {
         display: none;
     }
+
 
     .header {
         top: 10px;
@@ -1744,9 +1741,11 @@ footer {
             calc(100% - 20px);
     }
 
+
     #menuBtn {
         display: flex;
     }
+
 
     nav {
         position: absolute;
@@ -1777,150 +1776,114 @@ footer {
 
         backdrop-filter:
             blur(25px);
-
-        -webkit-backdrop-filter:
-            blur(25px);
     }
+
 
     nav.active {
         display: flex;
     }
 
-    nav a {
-        font-size: 14px;
-    }
-
-    .hero {
-        width:
-            calc(100% - 28px);
-
-        gap: 45px;
-    }
-
-    .hero h1 {
-        letter-spacing: -2px;
-    }
-
-    .stats {
-        gap: 20px;
-
-        flex-wrap: wrap;
-    }
 
     .feature-grid {
         grid-template-columns:
             1fr;
     }
 
+
     .profile {
         flex-direction:
             column;
 
         text-align: center;
-
-        padding:
-            35px 25px;
     }
+
 
     .profile-online {
-        justify-content:
-            center;
+        justify-content: center;
     }
+
+
+    .profile-buttons {
+        width: 100%;
+    }
+
+
+    .profile-buttons .btn {
+        width: 100%;
+    }
+
 
     footer {
         flex-direction:
             column;
 
-        align-items:
-            center;
-
-        text-align:
-            center;
+        text-align: center;
     }
+
+
+    .footer-right {
+        flex-direction:
+            column;
+
+        gap: 10px;
+    }
+
 }
 
 
-/* =========================================
-   SMALL MOBILE
-========================================= */
+/* =========================
+   SMALL PHONE
+========================= */
 
-@media
-(max-width: 520px) {
+@media (max-width: 520px) {
 
     .header {
         padding:
             8px 10px;
     }
 
+
     .logo {
         font-size: 14px;
     }
+
 
     .language-select {
         width: 60px;
         height: 36px;
 
+        padding:
+            0 4px;
+
         font-size: 10px;
     }
+
 
     .header-buttons button {
         width: 36px;
         height: 36px;
-
-        font-size: 14px;
     }
+
 
     .hero {
         padding-top: 120px;
     }
 
+
     .hero h1 {
         font-size: 42px;
+
+        letter-spacing: -2px;
     }
 
-    .hero-content p {
-        font-size: 14px;
-    }
 
     .core {
         height: 300px;
     }
 
+
     .project-image {
         height: 190px;
     }
 
-    .project-content {
-        padding: 22px;
-    }
-}
-
-
-/* =========================================
-   VERY SMALL MOBILE
-========================================= */
-
-@media
-(max-width: 400px) {
-
-    .logo {
-        font-size: 12px;
-    }
-
-    .language-select {
-        width: 54px;
-    }
-
-    .header-buttons {
-        gap: 4px;
-    }
-
-    .header-buttons button {
-        width: 33px;
-        height: 33px;
-    }
-
-    .hero h1 {
-        font-size: 36px;
-    }
 }
