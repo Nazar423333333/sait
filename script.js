@@ -1,4 +1,9 @@
 // ======================================
+// NEON SPACE — FULL SCRIPT.JS
+// ======================================
+
+
+// ======================================
 // ELEMENTS
 // ======================================
 
@@ -25,26 +30,29 @@ const header = document.querySelector(".header");
 
 
 // ======================================
-// MUSIC
+// MUSIC SETTINGS
 // ======================================
 
 let musicPlaying = false;
+let musicStartedOnce = false;
 
-
-// Гучність музики
 if (music) {
-    music.volume = 0.5;
+
+    music.volume = 0.55;
+
+    music.loop = true;
+
 }
 
 
 // ======================================
-// START MUSIC
+// MUSIC START FUNCTION
 // ======================================
 
 async function startMusic() {
 
     if (!music) {
-        return;
+        return false;
     }
 
     try {
@@ -52,18 +60,27 @@ async function startMusic() {
         await music.play();
 
         musicPlaying = true;
+        musicStartedOnce = true;
 
         if (musicBtn) {
+
             musicBtn.textContent = "🔊";
+
+            musicBtn.title = "Вимкнути музику";
+
         }
 
-        console.log("Музика запущена.");
+        console.log("🎵 Music started");
+
+        return true;
 
     } catch (error) {
 
         console.log(
-            "Автозапуск музики заблокований браузером."
+            "Автоматичний запуск музики заблокований браузером."
         );
+
+        return false;
 
     }
 
@@ -71,20 +88,47 @@ async function startMusic() {
 
 
 // ======================================
-// LOADING SCREEN + AUTOPLAY MUSIC
+// STOP MUSIC
+// ======================================
+
+function stopMusic() {
+
+    if (!music) {
+        return;
+    }
+
+    music.pause();
+
+    musicPlaying = false;
+
+    if (musicBtn) {
+
+        musicBtn.textContent = "🔇";
+
+        musicBtn.title = "Увімкнути музику";
+
+    }
+
+}
+
+
+// ======================================
+// LOADING SCREEN
 // ======================================
 
 window.addEventListener("load", async () => {
 
-    // Одразу пробуємо запустити музику
+    // Пробуємо запустити музику одразу
     await startMusic();
 
 
-    // Прибираємо loading screen
+    // Loader
     setTimeout(() => {
 
         if (loader) {
+
             loader.classList.add("hide");
+
         }
 
     }, 2100);
@@ -93,30 +137,67 @@ window.addEventListener("load", async () => {
 
 
 // ======================================
-// MUSIC AFTER FIRST CLICK
+// FIRST USER INTERACTION = MUSIC
 // ======================================
 
-// Якщо Chrome / Edge заблокував autoplay,
-// музика ввімкнеться після першого кліку.
+async function firstUserInteraction() {
 
-document.addEventListener(
-    "click",
-    async () => {
+    if (
+        music &&
+        music.paused &&
+        !musicStartedOnce
+    ) {
 
-        if (
-            music &&
-            music.paused &&
-            !musicPlaying
-        ) {
+        const started = await startMusic();
 
-            await startMusic();
+        if (started) {
+
+            removeInteractionListeners();
 
         }
 
-    },
-    {
-        once: true
+    } else {
+
+        removeInteractionListeners();
+
     }
+
+}
+
+
+function removeInteractionListeners() {
+
+    document.removeEventListener(
+        "pointerdown",
+        firstUserInteraction
+    );
+
+    document.removeEventListener(
+        "keydown",
+        firstUserInteraction
+    );
+
+    document.removeEventListener(
+        "touchstart",
+        firstUserInteraction
+    );
+
+}
+
+
+document.addEventListener(
+    "pointerdown",
+    firstUserInteraction
+);
+
+document.addEventListener(
+    "keydown",
+    firstUserInteraction
+);
+
+document.addEventListener(
+    "touchstart",
+    firstUserInteraction
 );
 
 
@@ -128,36 +209,18 @@ if (musicBtn && music) {
 
     musicBtn.addEventListener(
         "click",
-        async (event) => {
+        async event => {
 
             event.stopPropagation();
 
 
             if (music.paused) {
 
-                try {
-
-                    await music.play();
-
-                    musicPlaying = true;
-
-                    musicBtn.textContent = "🔊";
-
-                } catch (error) {
-
-                    alert(
-                        "Не вдалося запустити музику. Перевір файл music.mp3."
-                    );
-
-                }
+                await startMusic();
 
             } else {
 
-                music.pause();
-
-                musicPlaying = false;
-
-                musicBtn.textContent = "🔇";
+                stopMusic();
 
             }
 
@@ -217,7 +280,7 @@ if (menuBtn && nav) {
 
 
 // ======================================
-// DARK / LIGHT MODE
+// DARK / LIGHT THEME
 // ======================================
 
 if (themeBtn) {
@@ -326,6 +389,7 @@ const counterObserver =
                             counter.dataset.target
                         );
 
+
                     let current = 0;
 
 
@@ -399,12 +463,14 @@ if (systemCard) {
             const mouseX =
                 event.clientX - rect.left;
 
+
             const mouseY =
                 event.clientY - rect.top;
 
 
             const centerX =
                 rect.width / 2;
+
 
             const centerY =
                 rect.height / 2;
@@ -458,7 +524,10 @@ if (systemCard) {
 // CUSTOM CURSOR
 // ======================================
 
-if (cursorDot && cursorCircle) {
+if (
+    cursorDot &&
+    cursorCircle
+) {
 
     document.addEventListener(
         "mousemove",
@@ -467,6 +536,7 @@ if (cursorDot && cursorCircle) {
             cursorDot.style.left =
                 event.clientX + "px";
 
+
             cursorDot.style.top =
                 event.clientY + "px";
 
@@ -474,16 +544,21 @@ if (cursorDot && cursorCircle) {
             cursorCircle.animate(
 
                 {
+
                     left:
                         event.clientX + "px",
 
                     top:
                         event.clientY + "px"
+
                 },
 
                 {
+
                     duration: 350,
+
                     fill: "forwards"
+
                 }
 
             );
@@ -500,6 +575,7 @@ if (cursorDot && cursorCircle) {
 
 const canvas =
     document.getElementById("stars");
+
 
 let ctx = null;
 
@@ -526,6 +602,7 @@ function resizeCanvas() {
 
     canvas.width =
         window.innerWidth;
+
 
     canvas.height =
         window.innerHeight;
@@ -667,10 +744,12 @@ function animateStars() {
 
 
         if (
-            star.y > canvas.height
+            star.y >
+            canvas.height
         ) {
 
             star.y = 0;
+
 
             star.x =
                 Math.random()
@@ -727,9 +806,9 @@ function launchSystem() {
 
     if (launchMessage) {
 
-        launchMessage.classList.add(
-            "show"
-        );
+        launchMessage
+            .classList
+            .add("show");
 
     }
 
@@ -865,22 +944,27 @@ function createParticles() {
             [
 
                 {
+
                     transform:
                         "translate(0, 0) scale(1)",
 
                     opacity: 1
+
                 },
 
                 {
+
                     transform:
                         `translate(${x}px, ${y}px) scale(0)`,
 
                     opacity: 0
+
                 }
 
             ],
 
             {
+
                 duration:
                     Math.random()
                     * 900
@@ -888,6 +972,7 @@ function createParticles() {
 
                 easing:
                     "ease-out"
+
             }
 
         );
@@ -928,7 +1013,7 @@ window.addEventListener(
             header.style.boxShadow =
                 `
                     0 20px 60px
-                    rgba(0, 0, 0, 0.45)
+                    rgba(0,0,0,0.45)
                 `;
 
         } else {
@@ -936,7 +1021,7 @@ window.addEventListener(
             header.style.boxShadow =
                 `
                     0 20px 50px
-                    rgba(0, 0, 0, 0.25)
+                    rgba(0,0,0,0.25)
                 `;
 
         }
@@ -977,7 +1062,7 @@ document
                             circle at
                             ${x}px
                             ${y}px,
-                            rgba(120, 90, 255, 0.14),
+                            rgba(120,90,255,0.14),
                             var(--panel)
                         )
                     `;
@@ -1000,7 +1085,7 @@ document
 
 
 // ======================================
-// PROJECT BUTTON CLICK EFFECT
+// PROJECT BUTTON EFFECT
 // ======================================
 
 document
@@ -1020,6 +1105,90 @@ document
 
 
 // ======================================
+// PAGE VISIBILITY
+// ======================================
+
+// Якщо перейти на іншу вкладку,
+// музика не скидається.
+//
+// Коли повернешся,
+// вона продовжить грати,
+// якщо браузер її не призупинив.
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        if (
+            document.visibilityState === "visible" &&
+            musicPlaying &&
+            music &&
+            music.paused
+        ) {
+
+            music.play().catch(() => {});
+
+        }
+
+    }
+);
+
+
+// ======================================
+// ERROR CHECK
+// ======================================
+
+if (music) {
+
+    music.addEventListener(
+        "error",
+        () => {
+
+            console.error(
+                "❌ Не вдалося завантажити music.mp3"
+            );
+
+            if (musicBtn) {
+
+                musicBtn.textContent =
+                    "❌";
+
+            }
+
+        }
+    );
+
+
+    music.addEventListener(
+        "playing",
+        () => {
+
+            musicPlaying = true;
+
+            if (musicBtn) {
+
+                musicBtn.textContent =
+                    "🔊";
+
+            }
+
+        }
+    );
+
+
+    music.addEventListener(
+        "pause",
+        () => {
+
+            musicPlaying = false;
+
+        }
+    );
+
+}
+
+
+// ======================================
 // CONSOLE
 // ======================================
 
@@ -1029,5 +1198,5 @@ console.log(
 );
 
 console.log(
-    "Created by Nazar 🚀"
+    "🚀 Created by Nazar"
 );
