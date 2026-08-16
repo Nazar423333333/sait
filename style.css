@@ -1,9 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
-
-/* ===============================
+/* =========================================
    RESET
-================================ */
+========================================= */
 
 * {
     margin: 0;
@@ -11,71 +10,46 @@
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
 
-
 :root {
-
     --bg: #05050b;
-
-    --panel:
-        rgba(15, 15, 30, 0.72);
-
-    --panel-hover:
-        rgba(25, 22, 45, 0.88);
-
+    --panel: rgba(15, 15, 30, 0.72);
+    --panel-hover: rgba(25, 22, 45, 0.88);
     --text: #ffffff;
-
     --muted: #9292a7;
-
-    --border:
-        rgba(255, 255, 255, 0.09);
+    --border: rgba(255, 255, 255, 0.09);
 
     --purple: #795cff;
-
     --blue: #00dfff;
-
     --pink: #ff4fc8;
 }
 
-
 body.light {
-
     --bg: #eef0ff;
-
-    --panel:
-        rgba(255, 255, 255, 0.82);
-
-    --panel-hover:
-        rgba(255, 255, 255, 0.95);
-
+    --panel: rgba(255, 255, 255, 0.82);
+    --panel-hover: rgba(255, 255, 255, 0.95);
     --text: #101020;
-
     --muted: #606070;
-
-    --border:
-        rgba(0, 0, 0, 0.12);
+    --border: rgba(0, 0, 0, 0.12);
 }
 
-
 body {
-
     min-height: 100vh;
 
     font-family:
         "Inter",
+        Arial,
         sans-serif;
 
-    color:
-        var(--text);
+    color: var(--text);
 
     background:
         radial-gradient(
             circle at top,
-            rgba(100, 70, 255, 0.14),
+            rgba(100, 70, 255, 0.15),
             transparent 45%
         ),
         var(--bg);
@@ -88,44 +62,49 @@ body {
 }
 
 
-/* ===============================
+/* =========================================
    LOADER
-================================ */
+========================================= */
 
 #loader {
-
     position: fixed;
 
     inset: 0;
 
-    z-index: 99999;
+    width: 100%;
+    height: 100vh;
+
+    z-index: 999999;
 
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
-    background: #020205;
+    background:
+        radial-gradient(
+            circle at center,
+            #101020,
+            #020205 65%
+        );
 
-    transition:
-        opacity 0.8s,
-        visibility 0.8s;
+    /* ГОЛОВНЕ:
+       loader сам зникне навіть без JS */
+    animation:
+        forceHideLoader 0.65s ease 2.2s forwards;
 }
-
 
 #loader.hide {
-
     opacity: 0;
-
     visibility: hidden;
+    pointer-events: none;
 }
 
 
-#loader h1 {
+/* НЕОН ЛОГО */
 
+#loader h1 {
     font-size:
         clamp(
             42px,
@@ -149,30 +128,18 @@ body {
     background-size: 300%;
 
     -webkit-background-clip: text;
-
     background-clip: text;
 
     color: transparent;
 
     animation:
-        loaderGradient
-        3s
-        linear
-        infinite;
+        loaderGradient 3s linear infinite;
 }
 
 
-@keyframes loaderGradient {
-
-    to {
-        background-position: 300%;
-    }
-
-}
-
+/* LOADER LINE */
 
 .loader-line {
-
     width:
         min(
             400px,
@@ -188,13 +155,14 @@ body {
     border-radius: 30px;
 
     background: #141420;
+
+    box-shadow:
+        inset 0 0 10px
+        rgba(0, 0, 0, 0.6);
 }
 
-
 .loader-progress {
-
     width: 0;
-
     height: 100%;
 
     border-radius: inherit;
@@ -203,68 +171,96 @@ body {
         linear-gradient(
             90deg,
             #7657ff,
-            #00ddff
+            #00ddff,
+            #ff4ac8
         );
 
+    box-shadow:
+        0 0 20px
+        rgba(118, 87, 255, 0.8);
+
     animation:
-        loading
-        2s
-        forwards;
+        loaderProgress 2s ease forwards;
 }
-
-
-@keyframes loading {
-
-    to {
-        width: 100%;
-    }
-
-}
-
 
 #loader p {
-
     margin-top: 16px;
 
     color: #77778c;
 
     font-size: 10px;
+    font-weight: 700;
 
     letter-spacing: 4px;
 }
 
 
-/* ===============================
-   STAR CANVAS
-================================ */
+/* LOADER ANIMATIONS */
+
+@keyframes loaderGradient {
+    to {
+        background-position: 300%;
+    }
+}
+
+@keyframes loaderProgress {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes forceHideLoader {
+    0% {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    99% {
+        opacity: 0;
+        visibility: visible;
+        pointer-events: none;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+
+/* =========================================
+   STAR BACKGROUND
+========================================= */
 
 #stars {
-
     position: fixed;
 
     inset: 0;
 
-    z-index: -10;
-
     width: 100%;
-
     height: 100%;
+
+    z-index: -10;
 
     pointer-events: none;
 }
 
 
-/* ===============================
-   CURSOR
-================================ */
+/* =========================================
+   CUSTOM CURSOR
+========================================= */
 
 .cursor-dot,
 .cursor-circle {
-
     position: fixed;
 
     left: 0;
-
     top: 0;
 
     z-index: 10000;
@@ -277,11 +273,8 @@ body {
         translate(-50%, -50%);
 }
 
-
 .cursor-dot {
-
     width: 7px;
-
     height: 7px;
 
     background: #a38fff;
@@ -291,40 +284,34 @@ body {
         0 0 30px #7456ff;
 }
 
-
 .cursor-circle {
-
     width: 38px;
-
     height: 38px;
 
     border:
         1px solid
-        rgba(
-            150,
-            120,
-            255,
-            0.65
-        );
+        rgba(150, 120, 255, 0.65);
+
+    transition:
+        width 0.2s,
+        height 0.2s;
 }
 
 
-/* ===============================
+/* =========================================
    HEADER
-================================ */
+========================================= */
 
 .header {
-
     position: fixed;
 
     top: 15px;
-
     left: 50%;
-
-    z-index: 1000;
 
     transform:
         translateX(-50%);
+
+    z-index: 1000;
 
     width:
         min(
@@ -337,7 +324,6 @@ body {
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
     gap: 15px;
@@ -362,17 +348,15 @@ body {
 
     box-shadow:
         0 20px 50px
-        rgba(
-            0,
-            0,
-            0,
-            0.25
-        );
+        rgba(0, 0, 0, 0.25);
 }
 
 
-.logo {
+/* =========================================
+   LOGO
+========================================= */
 
+.logo {
     flex-shrink: 0;
 
     color:
@@ -380,37 +364,34 @@ body {
 
     text-decoration: none;
 
+    font-size: 20px;
     font-weight: 900;
 
-    font-size: 20px;
+    letter-spacing: 0.5px;
 }
 
-
 .logo span {
-
     color: #8369ff;
 
     text-shadow:
         0 0 20px
-        rgba(
-            131,
-            105,
-            255,
-            0.6
-        );
+        rgba(131, 105, 255, 0.65);
 }
 
 
-nav {
+/* =========================================
+   NAV
+========================================= */
 
+nav {
     display: flex;
+
+    align-items: center;
 
     gap: 26px;
 }
 
-
 nav a {
-
     position: relative;
 
     color:
@@ -419,32 +400,25 @@ nav a {
     text-decoration: none;
 
     font-size: 13px;
-
     font-weight: 600;
 
     transition: 0.3s;
 }
 
-
 nav a:hover {
-
     color:
         var(--text);
 }
 
-
 nav a::after {
-
     content: "";
 
     position: absolute;
 
     left: 0;
-
     bottom: -8px;
 
     width: 0;
-
     height: 2px;
 
     border-radius: 30px;
@@ -459,19 +433,16 @@ nav a::after {
     transition: 0.3s;
 }
 
-
 nav a:hover::after {
-
     width: 100%;
 }
 
 
-/* ===============================
+/* =========================================
    HEADER BUTTONS
-================================ */
+========================================= */
 
 .header-buttons {
-
     display: flex;
 
     align-items: center;
@@ -479,19 +450,15 @@ nav a:hover::after {
     gap: 7px;
 }
 
-
 .header-buttons button {
-
     flex-shrink: 0;
 
     width: 42px;
-
     height: 42px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border:
@@ -501,12 +468,7 @@ nav a:hover::after {
     border-radius: 12px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.04
-        );
+        rgba(255, 255, 255, 0.04);
 
     color:
         var(--text);
@@ -518,33 +480,27 @@ nav a:hover::after {
     transition: 0.3s;
 }
 
-
 .header-buttons button:hover {
-
     transform:
         translateY(-3px);
 
     background:
-        rgba(
-            120,
-            90,
-            255,
-            0.15
-        );
-}
+        rgba(120, 90, 255, 0.15);
 
+    border-color:
+        rgba(130, 100, 255, 0.45);
+}
 
 #menuBtn {
     display: none;
 }
 
 
-/* ===============================
-   LANGUAGE
-================================ */
+/* =========================================
+   LANGUAGE SELECT
+========================================= */
 
 .language-select {
-
     height: 42px;
 
     padding:
@@ -559,22 +515,17 @@ nav a:hover::after {
     outline: none;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.05
-        );
+        rgba(255, 255, 255, 0.05);
 
     color:
         var(--text);
 
     font-family:
         "Inter",
+        Arial,
         sans-serif;
 
     font-size: 12px;
-
     font-weight: 800;
 
     cursor: pointer;
@@ -582,41 +533,26 @@ nav a:hover::after {
     transition: 0.3s;
 }
 
-
 .language-select:hover {
-
     border-color:
-        rgba(
-            130,
-            100,
-            255,
-            0.5
-        );
+        rgba(130, 100, 255, 0.5);
 
     background:
-        rgba(
-            120,
-            90,
-            255,
-            0.14
-        );
+        rgba(120, 90, 255, 0.14);
 }
 
-
 .language-select option {
-
     background: #10101c;
 
     color: white;
 }
 
 
-/* ===============================
+/* =========================================
    HERO
-================================ */
+========================================= */
 
 .hero {
-
     width:
         min(
             1200px,
@@ -637,13 +573,10 @@ nav a:hover::after {
     align-items: center;
 
     padding-top: 130px;
-
     padding-bottom: 80px;
 }
 
-
 .badge {
-
     display: inline-block;
 
     padding:
@@ -653,35 +586,22 @@ nav a:hover::after {
 
     border:
         1px solid
-        rgba(
-            130,
-            100,
-            255,
-            0.35
-        );
+        rgba(130, 100, 255, 0.35);
 
     border-radius: 30px;
 
     background:
-        rgba(
-            120,
-            90,
-            255,
-            0.08
-        );
+        rgba(120, 90, 255, 0.08);
 
     color: #b6a7ff;
 
     font-size: 10px;
-
     font-weight: 700;
 
     letter-spacing: 3px;
 }
 
-
 .hero h1 {
-
     font-size:
         clamp(
             48px,
@@ -697,8 +617,11 @@ nav a:hover::after {
 }
 
 
-.gradient-text {
+/* =========================================
+   GRADIENT TEXT
+========================================= */
 
+.gradient-text {
     background:
         linear-gradient(
             90deg,
@@ -711,30 +634,21 @@ nav a:hover::after {
     background-size: 300%;
 
     -webkit-background-clip: text;
-
     background-clip: text;
 
     color: transparent;
 
     animation:
-        gradientMove
-        6s
-        linear
-        infinite;
+        gradientMove 6s linear infinite;
 }
 
-
 @keyframes gradientMove {
-
     to {
         background-position: 300%;
     }
-
 }
 
-
 .hero-content p {
-
     max-width: 610px;
 
     margin-top: 28px;
@@ -747,9 +661,7 @@ nav a:hover::after {
     line-height: 1.8;
 }
 
-
 .hero-buttons {
-
     display: flex;
 
     flex-wrap: wrap;
@@ -760,18 +672,16 @@ nav a:hover::after {
 }
 
 
-/* ===============================
+/* =========================================
    BUTTONS
-================================ */
+========================================= */
 
 .btn {
-
     min-height: 52px;
 
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding:
@@ -788,24 +698,22 @@ nav a:hover::after {
     font-family: inherit;
 
     font-size: 13px;
-
     font-weight: 800;
 
     cursor: pointer;
 
-    transition: 0.3s;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s,
+        background 0.3s;
 }
 
-
 .btn:hover {
-
     transform:
         translateY(-4px);
 }
 
-
 .primary {
-
     background:
         linear-gradient(
             135deg,
@@ -815,37 +723,18 @@ nav a:hover::after {
 
     box-shadow:
         0 15px 35px
-        rgba(
-            100,
-            70,
-            255,
-            0.3
-        );
+        rgba(100, 70, 255, 0.3);
 }
-
 
 .primary:hover {
-
     box-shadow:
         0 18px 45px
-        rgba(
-            100,
-            70,
-            255,
-            0.5
-        );
+        rgba(100, 70, 255, 0.55);
 }
 
-
 .secondary {
-
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
+        rgba(255, 255, 255, 0.06);
 
     border:
         1px solid
@@ -856,12 +745,11 @@ nav a:hover::after {
 }
 
 
-/* ===============================
+/* =========================================
    STATS
-================================ */
+========================================= */
 
 .stats {
-
     display: flex;
 
     gap: 40px;
@@ -869,23 +757,17 @@ nav a:hover::after {
     margin-top: 50px;
 }
 
-
 .stats div {
-
     display: flex;
 
     flex-direction: column;
 }
 
-
 .stats strong {
-
     font-size: 27px;
 }
 
-
 .stats span {
-
     margin-top: 5px;
 
     color:
@@ -897,12 +779,11 @@ nav a:hover::after {
 }
 
 
-/* ===============================
+/* =========================================
    SYSTEM CARD
-================================ */
+========================================= */
 
 .system-card {
-
     padding: 18px;
 
     border:
@@ -914,18 +795,8 @@ nav a:hover::after {
     background:
         linear-gradient(
             145deg,
-            rgba(
-                255,
-                255,
-                255,
-                0.1
-            ),
-            rgba(
-                255,
-                255,
-                255,
-                0.025
-            )
+            rgba(255, 255, 255, 0.1),
+            rgba(255, 255, 255, 0.025)
         );
 
     backdrop-filter:
@@ -936,27 +807,23 @@ nav a:hover::after {
 
     box-shadow:
         0 40px 90px
-        rgba(
-            0,
-            0,
-            0,
-            0.45
-        );
+        rgba(0, 0, 0, 0.45);
 
     transition:
-        transform
-        0.15s;
+        transform 0.15s;
 }
 
 
-.window-bar {
+/* =========================================
+   WINDOW BAR
+========================================= */
 
+.window-bar {
     height: 40px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
     border-bottom:
@@ -964,13 +831,10 @@ nav a:hover::after {
         var(--border);
 }
 
-
 .dot {
-
     display: inline-block;
 
     width: 9px;
-
     height: 9px;
 
     margin-right: 4px;
@@ -978,24 +842,19 @@ nav a:hover::after {
     border-radius: 50%;
 }
 
-
 .red {
     background: #ff5e57;
 }
-
 
 .yellow {
     background: #ffc13c;
 }
 
-
 .green {
     background: #2ed358;
 }
 
-
 .window-title {
-
     color:
         var(--muted);
 
@@ -1005,12 +864,11 @@ nav a:hover::after {
 }
 
 
-/* ===============================
+/* =========================================
    CORE
-================================ */
+========================================= */
 
 .core {
-
     position: relative;
 
     height: 350px;
@@ -1018,33 +876,27 @@ nav a:hover::after {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     overflow: hidden;
 }
 
-
 .core-ball {
-
     position: absolute;
 
     z-index: 5;
 
     width: 130px;
-
     height: 130px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border-radius: 50%;
 
     font-size: 42px;
-
     font-weight: 900;
 
     background:
@@ -1057,102 +909,63 @@ nav a:hover::after {
 
     box-shadow:
         0 0 60px
-        rgba(
-            120,
-            80,
-            255,
-            0.7
-        );
+        rgba(120, 80, 255, 0.7);
 
     animation:
-        corePulse
-        3s
-        ease-in-out
-        infinite;
+        corePulse 3s ease-in-out infinite;
 }
 
-
 @keyframes corePulse {
-
     50% {
-
         transform:
             scale(1.07);
 
         box-shadow:
             0 0 100px
-            rgba(
-                120,
-                80,
-                255,
-                0.9
-            );
+            rgba(120, 80, 255, 0.9);
     }
-
 }
 
 
-.orbit {
+/* =========================================
+   ORBITS
+========================================= */
 
+.orbit {
     position: absolute;
 
     border:
         1px solid
-        rgba(
-            140,
-            110,
-            255,
-            0.5
-        );
+        rgba(140, 110, 255, 0.5);
 
     border-radius: 50%;
 }
 
-
 .orbit1 {
-
     width: 190px;
-
     height: 80px;
 
     animation:
-        orbit1
-        7s
-        linear
-        infinite;
+        orbit1 7s linear infinite;
 }
 
-
 .orbit2 {
-
     width: 230px;
-
     height: 105px;
 
     animation:
-        orbit2
-        9s
-        linear
-        infinite;
+        orbit2 9s linear infinite;
 }
 
-
 .orbit3 {
-
     width: 160px;
-
     height: 240px;
 
     animation:
-        orbit3
-        11s
-        linear
-        infinite;
+        orbit3 11s linear infinite;
 }
 
-
 @keyframes orbit1 {
-
     from {
         transform:
             rotate(20deg);
@@ -1162,12 +975,9 @@ nav a:hover::after {
         transform:
             rotate(380deg);
     }
-
 }
 
-
 @keyframes orbit2 {
-
     from {
         transform:
             rotate(-40deg);
@@ -1177,32 +987,30 @@ nav a:hover::after {
         transform:
             rotate(320deg);
     }
-
 }
 
-
 @keyframes orbit3 {
+    from {
+        transform:
+            rotate(0deg);
+    }
 
     to {
         transform:
             rotate(360deg);
     }
-
 }
 
 
-/* ===============================
+/* =========================================
    SYSTEM INFO
-================================ */
+========================================= */
 
 .system-info {
-
     padding: 10px;
 }
 
-
 .system-info > div:not(.progress) {
-
     display: flex;
 
     justify-content: space-between;
@@ -1216,15 +1024,11 @@ nav a:hover::after {
     font-size: 11px;
 }
 
-
 .online {
-
     color: #4cff9d;
 }
 
-
 .progress {
-
     height: 7px;
 
     margin-top: 15px;
@@ -1234,19 +1038,11 @@ nav a:hover::after {
     border-radius: 30px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
+        rgba(255, 255, 255, 0.06);
 }
 
-
 .progress-fill {
-
     width: 99%;
-
     height: 100%;
 
     border-radius: inherit;
@@ -1259,17 +1055,15 @@ nav a:hover::after {
         );
 
     box-shadow:
-        0 0 15px
-        #7254ff;
+        0 0 15px #7254ff;
 }
 
 
-/* ===============================
+/* =========================================
    SECTIONS
-================================ */
+========================================= */
 
 .section {
-
     width:
         min(
             1200px,
@@ -1282,9 +1076,7 @@ nav a:hover::after {
         110px 0;
 }
 
-
 .section-title {
-
     max-width: 720px;
 
     margin:
@@ -1293,21 +1085,16 @@ nav a:hover::after {
     text-align: center;
 }
 
-
 .section-title > span {
-
     color: #886fff;
 
     font-size: 10px;
-
     font-weight: 800;
 
     letter-spacing: 3px;
 }
 
-
 .section-title h2 {
-
     margin-top: 15px;
 
     font-size:
@@ -1318,9 +1105,7 @@ nav a:hover::after {
         );
 }
 
-
 .section-title p {
-
     margin-top: 18px;
 
     color:
@@ -1330,12 +1115,11 @@ nav a:hover::after {
 }
 
 
-/* ===============================
+/* =========================================
    FEATURES
-================================ */
+========================================= */
 
 .feature-grid {
-
     display: grid;
 
     grid-template-columns:
@@ -1344,9 +1128,7 @@ nav a:hover::after {
     gap: 18px;
 }
 
-
 .feature {
-
     min-height: 250px;
 
     padding: 30px;
@@ -1366,44 +1148,28 @@ nav a:hover::after {
     transition: 0.4s;
 }
 
-
 .feature:hover {
-
     transform:
         translateY(-10px);
 
     border-color:
-        rgba(
-            130,
-            100,
-            255,
-            0.5
-        );
+        rgba(130, 100, 255, 0.5);
 
     background:
         var(--panel-hover);
 
     box-shadow:
         0 30px 60px
-        rgba(
-            0,
-            0,
-            0,
-            0.25
-        );
+        rgba(0, 0, 0, 0.25);
 }
 
-
 .feature-icon {
-
     width: 55px;
-
     height: 55px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     margin-bottom: 40px;
@@ -1411,25 +1177,16 @@ nav a:hover::after {
     border-radius: 15px;
 
     background:
-        rgba(
-            120,
-            80,
-            255,
-            0.13
-        );
+        rgba(120, 80, 255, 0.13);
 
     font-size: 25px;
 }
 
-
 .feature h3 {
-
     margin-bottom: 12px;
 }
 
-
 .feature p {
-
     color:
         var(--muted);
 
@@ -1439,12 +1196,11 @@ nav a:hover::after {
 }
 
 
-/* ===============================
+/* =========================================
    PROJECTS
-================================ */
+========================================= */
 
 .projects-grid {
-
     display: grid;
 
     grid-template-columns:
@@ -1453,9 +1209,7 @@ nav a:hover::after {
     gap: 22px;
 }
 
-
 .project {
-
     overflow: hidden;
 
     border:
@@ -1476,62 +1230,41 @@ nav a:hover::after {
         box-shadow 0.4s;
 }
 
-
 .project:hover {
-
     transform:
         translateY(-12px);
 
     border-color:
-        rgba(
-            130,
-            100,
-            255,
-            0.5
-        );
+        rgba(130, 100, 255, 0.5);
 
     box-shadow:
         0 35px 80px
-        rgba(
-            0,
-            0,
-            0,
-            0.32
-        );
+        rgba(0, 0, 0, 0.32);
 }
 
-
 .project-image {
-
     height: 230px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     font-size: 80px;
 }
 
-
 .project-image span {
-
     transition: 0.4s;
 }
 
-
 .project:hover
 .project-image span {
-
     transform:
         scale(1.15)
         rotate(-5deg);
 }
 
-
 .fnaf-image {
-
     background:
         radial-gradient(
             circle,
@@ -1540,9 +1273,7 @@ nav a:hover::after {
         );
 }
 
-
 .optimizer-image {
-
     background:
         radial-gradient(
             circle,
@@ -1551,9 +1282,7 @@ nav a:hover::after {
         );
 }
 
-
 .game-image {
-
     background:
         radial-gradient(
             circle,
@@ -1562,15 +1291,11 @@ nav a:hover::after {
         );
 }
 
-
 .project-content {
-
     padding: 27px;
 }
 
-
 .project-tag {
-
     display: inline-block;
 
     margin-bottom: 15px;
@@ -1580,43 +1305,28 @@ nav a:hover::after {
 
     border:
         1px solid
-        rgba(
-            130,
-            100,
-            255,
-            0.25
-        );
+        rgba(130, 100, 255, 0.25);
 
     border-radius: 8px;
 
     background:
-        rgba(
-            120,
-            90,
-            255,
-            0.08
-        );
+        rgba(120, 90, 255, 0.08);
 
     color: #a897ff;
 
     font-size: 9px;
-
     font-weight: 800;
 
     letter-spacing: 1px;
 }
 
-
 .project-content h3 {
-
     font-size: 20px;
 
     line-height: 1.3;
 }
 
-
 .project-content p {
-
     min-height: 70px;
 
     margin:
@@ -1631,16 +1341,17 @@ nav a:hover::after {
 }
 
 
+/* =========================================
+   PROJECT BUTTON
+========================================= */
+
 .project-btn {
-
     width: 100%;
-
     min-height: 50px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 10px;
@@ -1655,7 +1366,6 @@ nav a:hover::after {
     text-decoration: none;
 
     font-size: 12px;
-
     font-weight: 800;
 
     background:
@@ -1667,54 +1377,37 @@ nav a:hover::after {
 
     box-shadow:
         0 10px 25px
-        rgba(
-            100,
-            70,
-            255,
-            0.3
-        );
+        rgba(100, 70, 255, 0.3);
 
     transition: 0.3s;
 }
 
-
 .project-btn:hover {
-
     transform:
         translateY(-3px);
 
     box-shadow:
         0 16px 38px
-        rgba(
-            100,
-            70,
-            255,
-            0.5
-        );
+        rgba(100, 70, 255, 0.5);
 }
 
-
 .project-btn b {
-
     font-size: 18px;
 
     transition: 0.3s;
 }
 
-
 .project-btn:hover b {
-
     transform:
         translateX(5px);
 }
 
 
-/* ===============================
+/* =========================================
    PROFILE
-================================ */
+========================================= */
 
 .profile {
-
     display: flex;
 
     align-items: center;
@@ -1736,19 +1429,15 @@ nav a:hover::after {
         blur(20px);
 }
 
-
 .avatar {
-
     flex-shrink: 0;
 
     width: 100px;
-
     height: 100px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border-radius: 50%;
@@ -1761,56 +1450,39 @@ nav a:hover::after {
         );
 
     font-size: 40px;
-
     font-weight: 900;
 
     box-shadow:
         0 0 50px
-        rgba(
-            100,
-            80,
-            255,
-            0.4
-        );
+        rgba(100, 80, 255, 0.4);
 }
 
-
 .profile-info {
-
     flex: 1;
 }
 
-
 .profile-info > span {
-
     color: #886fff;
 
     font-size: 9px;
-
     font-weight: 800;
 
     letter-spacing: 3px;
 }
 
-
 .profile-info h2 {
-
     margin:
         8px 0;
 
     font-size: 35px;
 }
 
-
 .profile-info p {
-
     color:
         var(--muted);
 }
 
-
 .profile-online {
-
     display: flex;
 
     align-items: center;
@@ -1822,16 +1494,14 @@ nav a:hover::after {
     color: #50ffa5;
 
     font-size: 11px;
-
     font-weight: 700;
 }
 
-
 .online-dot {
-
     width: 8px;
-
     height: 8px;
+
+    display: inline-block;
 
     border-radius: 50%;
 
@@ -1842,12 +1512,11 @@ nav a:hover::after {
 }
 
 
-/* ===============================
+/* =========================================
    LAUNCH
-================================ */
+========================================= */
 
 .launch-box {
-
     padding:
         90px 25px;
 
@@ -1862,31 +1531,21 @@ nav a:hover::after {
     background:
         radial-gradient(
             circle at top,
-            rgba(
-                100,
-                70,
-                255,
-                0.2
-            ),
+            rgba(100, 70, 255, 0.2),
             var(--panel)
         );
 }
 
-
 .launch-label {
-
     color: #8c73ff;
 
     font-size: 10px;
-
     font-weight: 800;
 
     letter-spacing: 3px;
 }
 
-
 .launch-box h2 {
-
     margin-top: 15px;
 
     font-size:
@@ -1897,9 +1556,7 @@ nav a:hover::after {
         );
 }
 
-
 .launch-box p {
-
     margin:
         15px 0 30px;
 
@@ -1907,15 +1564,12 @@ nav a:hover::after {
         var(--muted);
 }
 
-
 #launchMessage {
-
     margin-top: 25px;
 
     color: #52ffa7;
 
     font-size: 15px;
-
     font-weight: 900;
 
     letter-spacing: 2px;
@@ -1928,9 +1582,7 @@ nav a:hover::after {
     transition: 0.5s;
 }
 
-
 #launchMessage.show {
-
     opacity: 1;
 
     transform:
@@ -1938,12 +1590,11 @@ nav a:hover::after {
 }
 
 
-/* ===============================
+/* =========================================
    FOOTER
-================================ */
+========================================= */
 
 footer {
-
     width:
         min(
             1200px,
@@ -1972,12 +1623,11 @@ footer {
 }
 
 
-/* ===============================
+/* =========================================
    REVEAL
-================================ */
+========================================= */
 
 .reveal {
-
     opacity: 0;
 
     transform:
@@ -1988,9 +1638,7 @@ footer {
         transform 0.8s;
 }
 
-
 .reveal.active {
-
     opacity: 1;
 
     transform:
@@ -1998,65 +1646,57 @@ footer {
 }
 
 
-/* ===============================
+/* =========================================
    TABLET
-================================ */
+========================================= */
 
 @media
 (max-width: 1050px) {
 
     nav {
-
         gap: 15px;
     }
 
-
     nav a {
-
         font-size: 11px;
     }
 
-
     .language-select {
-
         width: 66px;
 
         padding:
             0 5px;
     }
-
 }
 
+
+/* =========================================
+   TABLET SMALL
+========================================= */
 
 @media
 (max-width: 900px) {
 
     .hero {
-
         grid-template-columns:
             1fr;
 
         text-align: center;
+
+        gap: 55px;
     }
 
-
     .hero-content p {
-
         margin-left: auto;
-
         margin-right: auto;
     }
 
-
     .hero-buttons,
     .stats {
-
         justify-content: center;
     }
 
-
     .system-card {
-
         width:
             min(
                 500px,
@@ -2066,68 +1706,52 @@ footer {
         margin: auto;
     }
 
-
     .feature-grid {
-
         grid-template-columns:
             repeat(2, 1fr);
     }
 
-
     .projects-grid {
-
         grid-template-columns:
             1fr;
     }
 
-
     .project {
-
         width: 100%;
-
         max-width: 600px;
 
         margin: auto;
     }
-
 }
 
 
-/* ===============================
+/* =========================================
    MOBILE
-================================ */
+========================================= */
 
 @media
 (max-width: 760px) {
 
     .cursor-dot,
     .cursor-circle {
-
         display: none;
     }
 
-
     .header {
-
         top: 10px;
 
         width:
             calc(100% - 20px);
     }
 
-
     #menuBtn {
-
         display: flex;
     }
 
-
     nav {
-
         position: absolute;
 
         top: 82px;
-
         left: 0;
 
         width: 100%;
@@ -2135,6 +1759,8 @@ footer {
         display: none;
 
         flex-direction: column;
+
+        align-items: flex-start;
 
         gap: 22px;
 
@@ -2151,54 +1777,42 @@ footer {
 
         backdrop-filter:
             blur(25px);
+
+        -webkit-backdrop-filter:
+            blur(25px);
     }
 
-
     nav.active {
-
         display: flex;
     }
 
-
     nav a {
-
         font-size: 14px;
     }
 
-
     .hero {
-
         width:
             calc(100% - 28px);
 
         gap: 45px;
     }
 
-
     .hero h1 {
-
-        letter-spacing:
-            -2px;
+        letter-spacing: -2px;
     }
 
-
     .stats {
-
         gap: 20px;
 
         flex-wrap: wrap;
     }
 
-
     .feature-grid {
-
         grid-template-columns:
             1fr;
     }
 
-
     .profile {
-
         flex-direction:
             column;
 
@@ -2208,16 +1822,12 @@ footer {
             35px 25px;
     }
 
-
     .profile-online {
-
         justify-content:
             center;
     }
 
-
     footer {
-
         flex-direction:
             column;
 
@@ -2227,61 +1837,90 @@ footer {
         text-align:
             center;
     }
-
 }
 
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
 
 @media
 (max-width: 520px) {
 
     .header {
-
         padding:
             8px 10px;
     }
 
-
     .logo {
-
         font-size: 14px;
     }
 
-
     .language-select {
-
         width: 60px;
-
         height: 36px;
 
         font-size: 10px;
     }
 
-
     .header-buttons button {
-
         width: 36px;
-
         height: 36px;
 
         font-size: 14px;
     }
 
+    .hero {
+        padding-top: 120px;
+    }
 
     .hero h1 {
-
         font-size: 42px;
     }
 
+    .hero-content p {
+        font-size: 14px;
+    }
 
     .core {
-
         height: 300px;
     }
 
-
     .project-image {
-
         height: 190px;
     }
 
+    .project-content {
+        padding: 22px;
+    }
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media
+(max-width: 400px) {
+
+    .logo {
+        font-size: 12px;
+    }
+
+    .language-select {
+        width: 54px;
+    }
+
+    .header-buttons {
+        gap: 4px;
+    }
+
+    .header-buttons button {
+        width: 33px;
+        height: 33px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
 }
