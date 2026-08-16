@@ -1,37 +1,24 @@
-// ======================================================
-// NEON SPACE — FULL WORKING SCRIPT.JS
-// ======================================================
+// =====================================================
+// NEON SPACE
+// FULL SCRIPT.JS
+// =====================================================
 
 
-// ======================================================
-// LOADER — СТАВИМО ПЕРШИМ
-// ======================================================
-
-const loader = document.getElementById("loader");
-
-function hideLoader() {
-    if (loader) {
-        loader.classList.add("hide");
-    }
-}
-
-// Навіть якщо сторінка довго щось завантажує,
-// loader все одно зникне через 2.2 секунди.
-setTimeout(hideLoader, 2200);
-
-window.addEventListener("load", () => {
-    setTimeout(hideLoader, 300);
-});
-
-
-// ======================================================
+// =====================================================
 // ELEMENTS
-// ======================================================
+// =====================================================
 
-const menuBtn = document.getElementById("menuBtn");
-const nav = document.getElementById("nav");
+const loader =
+    document.getElementById("loader");
 
-const themeBtn = document.getElementById("themeBtn");
+const menuBtn =
+    document.getElementById("menuBtn");
+
+const nav =
+    document.getElementById("nav");
+
+const themeBtn =
+    document.getElementById("themeBtn");
 
 const languageSelect =
     document.getElementById("languageSelect");
@@ -60,51 +47,83 @@ const cursorDot =
 const cursorCircle =
     document.querySelector(".cursor-circle");
 
-const header =
-    document.querySelector(".header");
+
+// =====================================================
+// LOADER
+// =====================================================
+
+setTimeout(() => {
+
+    if (loader) {
+
+        loader.classList.add("hide");
+
+    }
+
+}, 2000);
 
 
-// ======================================================
+// =====================================================
 // LANGUAGES
-// ======================================================
+// =====================================================
 
 const translations = {
 
-    // =====================
-    // УКРАЇНСЬКА
-    // =====================
     uk: {
 
-        loading: "ЗАПУСК СИСТЕМИ...",
+        loading:
+            "ЗАПУСК СИСТЕМИ...",
 
-        home: "Головна",
-        features: "Можливості",
-        projects: "Проєкти",
-        profile: "Профіль",
+        home:
+            "Головна",
 
-        badge: "✦ NAZAR DIGITAL EXPERIENCE",
+        features:
+            "Можливості",
 
-        welcome: "ЛАСКАВО",
-        welcomeNeon: "В NEON SPACE",
+        projects:
+            "Проєкти",
+
+        profile:
+            "Профіль",
+
+        badge:
+            "✦ NAZAR DIGITAL EXPERIENCE",
+
+        welcome:
+            "ЛАСКАВО",
+
+        welcomeNeon:
+            "В NEON SPACE",
 
         heroText:
             "Мій сучасний сайт із неоновим дизайном, зоряним фоном, 3D-анімаціями, музикою та моїми іграми й програмами.",
 
-        myProjects: "🚀 МОЇ ПРОЄКТИ",
+        myProjects:
+            "🚀 МОЇ ПРОЄКТИ",
 
-        launch: "⚡ ЗАПУСТИТИ",
+        launch:
+            "⚡ ЗАПУСТИТИ",
 
-        projectsCount: "МОЇ ПРОЄКТИ",
+        projectsCount:
+            "МОЇ ПРОЄКТИ",
 
-        status: "СТАТУС",
-        online: "ОНЛАЙН",
+        status:
+            "СТАТУС",
 
-        corePower: "ПОТУЖНІСТЬ ЯДРА",
+        online:
+            "ОНЛАЙН",
 
-        featuresLabel: "МОЖЛИВОСТІ",
+        corePower:
+            "ПОТУЖНІСТЬ ЯДРА",
 
-        newSite: "Сайт нового",
-        generation: "покоління",
+        featuresLabel:
+            "МОЖЛИВОСТІ",
+
+        newSite:
+            "Сайт нового",
+
+        generation:
+            "покоління",
 
         featuresDescription:
             "Неоновий дизайн, анімації, музика та мої проєкти в одному місці.",
@@ -121,10 +140,14 @@ const translations = {
         musicText:
             "Фонова музика та зручне керування звуком.",
 
-        mySites: "МОЇ САЙТИ",
+        mySites:
+            "МОЇ САЙТИ",
 
-        myWord: "Мої",
-        projectsWord: "проєкти",
+        myWord:
+            "Мої",
+
+        projectsWord:
+            "проєкти",
 
         projectsDescription:
             "Натискай кнопку та відкривай потрібний проєкт.",
@@ -176,128 +199,31 @@ const translations = {
     },
 
 
-    // =====================
-    // ENGLISH
-    // =====================
-    en: {
-
-        loading: "STARTING SYSTEM...",
-
-        home: "Home",
-        features: "Features",
-        projects: "Projects",
-        profile: "Profile",
-
-        badge: "✦ NAZAR DIGITAL EXPERIENCE",
-
-        welcome: "WELCOME",
-        welcomeNeon: "TO NEON SPACE",
-
-        heroText:
-            "My modern website with neon design, a star background, 3D animations, music, games and software.",
-
-        myProjects: "🚀 MY PROJECTS",
-
-        launch: "⚡ LAUNCH",
-
-        projectsCount: "MY PROJECTS",
-
-        status: "STATUS",
-        online: "ONLINE",
-
-        corePower: "CORE POWER",
-
-        featuresLabel: "FEATURES",
-
-        newSite: "Website of the",
-        generation: "new generation",
-
-        featuresDescription:
-            "Neon design, animations, music and my projects all in one place.",
-
-        speedText:
-            "A fast website with smooth transitions and effects.",
-
-        spaceText:
-            "Animated stars, neon colors and futuristic space design.",
-
-        responsiveText:
-            "The website works on computers, phones and tablets.",
-
-        musicText:
-            "Background music with easy sound controls.",
-
-        mySites: "MY WEBSITES",
-
-        myWord: "My",
-        projectsWord: "projects",
-
-        projectsDescription:
-            "Press a button to open the project you want.",
-
-        fnafTitle:
-            "FIVE NIGHTS AT ATB",
-
-        fnafDescription:
-            "My FNAF-style game that you can play directly in your browser.",
-
-        playNow:
-            "🎮 PLAY NOW",
-
-        optimizerDescription:
-            "The website for my Windows Optimizer project.",
-
-        openProject:
-            "🚀 OPEN",
-
-        superGame:
-            "NAZAR SUPER GAME",
-
-        gameDescription:
-            "My browser game with gameplay features and a progression system.",
-
-        startGame:
-            "⚡ START GAME",
-
-        creatorProfile:
-            "CREATOR PROFILE",
-
-        creatorDescription:
-            "Web Developer • Game Creator • PC Enthusiast",
-
-        ready:
-            "Ready to launch?",
-
-        activate:
-            "Activate the NEON SPACE system.",
-
-        launchButton:
-            "🚀 LAUNCH",
-
-        systemOnline:
-            "✅ SYSTEM ONLINE",
-
-        footer:
-            "Created by Nazar • © 2026"
-    },
-
-
-    // =====================
-    // NEDERLANDS
-    // =====================
     nl: {
 
-        loading: "SYSTEEM STARTEN...",
+        loading:
+            "SYSTEEM STARTEN...",
 
-        home: "Home",
-        features: "Functies",
-        projects: "Projecten",
-        profile: "Profiel",
+        home:
+            "Home",
 
-        badge: "✦ NAZAR DIGITAL EXPERIENCE",
+        features:
+            "Functies",
 
-        welcome: "WELKOM",
-        welcomeNeon: "BIJ NEON SPACE",
+        projects:
+            "Projecten",
+
+        profile:
+            "Profiel",
+
+        badge:
+            "✦ NAZAR DIGITAL EXPERIENCE",
+
+        welcome:
+            "WELKOM",
+
+        welcomeNeon:
+            "BIJ NEON SPACE",
 
         heroText:
             "Mijn moderne website met neondesign, sterrenachtergrond, 3D-animaties, muziek, games en programma's.",
@@ -403,9 +329,136 @@ const translations = {
     },
 
 
-    // =====================
-    // POLSKI
-    // =====================
+    en: {
+
+        loading:
+            "STARTING SYSTEM...",
+
+        home:
+            "Home",
+
+        features:
+            "Features",
+
+        projects:
+            "Projects",
+
+        profile:
+            "Profile",
+
+        badge:
+            "✦ NAZAR DIGITAL EXPERIENCE",
+
+        welcome:
+            "WELCOME",
+
+        welcomeNeon:
+            "TO NEON SPACE",
+
+        heroText:
+            "My modern website with neon design, a star background, 3D animations, music, games and software.",
+
+        myProjects:
+            "🚀 MY PROJECTS",
+
+        launch:
+            "⚡ LAUNCH",
+
+        projectsCount:
+            "MY PROJECTS",
+
+        status:
+            "STATUS",
+
+        online:
+            "ONLINE",
+
+        corePower:
+            "CORE POWER",
+
+        featuresLabel:
+            "FEATURES",
+
+        newSite:
+            "Website of the",
+
+        generation:
+            "new generation",
+
+        featuresDescription:
+            "Neon design, animations, music and my projects all in one place.",
+
+        speedText:
+            "A fast website with smooth transitions and effects.",
+
+        spaceText:
+            "Animated stars, neon colors and futuristic space design.",
+
+        responsiveText:
+            "The website works on computers, phones and tablets.",
+
+        musicText:
+            "Background music with easy sound controls.",
+
+        mySites:
+            "MY WEBSITES",
+
+        myWord:
+            "My",
+
+        projectsWord:
+            "projects",
+
+        projectsDescription:
+            "Press a button to open the project you want.",
+
+        fnafTitle:
+            "FIVE NIGHTS AT ATB",
+
+        fnafDescription:
+            "My FNAF-style game that you can play directly in your browser.",
+
+        playNow:
+            "🎮 PLAY NOW",
+
+        optimizerDescription:
+            "The website for my Windows Optimizer project.",
+
+        openProject:
+            "🚀 OPEN",
+
+        superGame:
+            "NAZAR SUPER GAME",
+
+        gameDescription:
+            "My browser game with gameplay features and a progression system.",
+
+        startGame:
+            "⚡ START GAME",
+
+        creatorProfile:
+            "CREATOR PROFILE",
+
+        creatorDescription:
+            "Web Developer • Game Creator • PC Enthusiast",
+
+        ready:
+            "Ready to launch?",
+
+        activate:
+            "Activate the NEON SPACE system.",
+
+        launchButton:
+            "🚀 LAUNCH",
+
+        systemOnline:
+            "✅ SYSTEM ONLINE",
+
+        footer:
+            "Created by Nazar • © 2026"
+    },
+
+
     pl: {
 
         loading:
@@ -536,9 +589,6 @@ const translations = {
     },
 
 
-    // =====================
-    // DANSK
-    // =====================
     da: {
 
         loading:
@@ -667,12 +717,13 @@ const translations = {
         footer:
             "Lavet af Nazar • © 2026"
     }
+
 };
 
 
-// ======================================================
+// =====================================================
 // CHANGE LANGUAGE
-// ======================================================
+// =====================================================
 
 function changeLanguage(language) {
 
@@ -690,6 +741,7 @@ function changeLanguage(language) {
 
             const key =
                 element.dataset.i18n;
+
 
             if (
                 Object.prototype.hasOwnProperty.call(
@@ -718,9 +770,9 @@ function changeLanguage(language) {
 }
 
 
-// ======================================================
+// =====================================================
 // LANGUAGE SELECT
-// ======================================================
+// =====================================================
 
 if (languageSelect) {
 
@@ -735,7 +787,8 @@ if (languageSelect) {
         !translations[savedLanguage]
     ) {
 
-        savedLanguage = "uk";
+        savedLanguage =
+            "uk";
 
     }
 
@@ -763,25 +816,27 @@ if (languageSelect) {
 }
 
 
-// ======================================================
+// =====================================================
 // MUSIC
-// ======================================================
+// =====================================================
 
 let musicPlaying = false;
+
 let musicStartedOnce = false;
 
 
 if (music) {
 
     music.volume = 0.55;
+
     music.loop = true;
 
 }
 
 
-// ======================================================
+// =====================================================
 // START MUSIC
-// ======================================================
+// =====================================================
 
 async function startMusic() {
 
@@ -794,12 +849,20 @@ async function startMusic() {
 
         await music.play();
 
-        musicPlaying = true;
-        musicStartedOnce = true;
+
+        musicPlaying =
+            true;
+
+
+        musicStartedOnce =
+            true;
 
 
         if (musicBtn) {
-            musicBtn.textContent = "🔊";
+
+            musicBtn.textContent =
+                "🔊";
+
         }
 
 
@@ -808,8 +871,9 @@ async function startMusic() {
     } catch (error) {
 
         console.log(
-            "Autoplay blocked. Waiting for first click."
+            "Autoplay blocked. Waiting for click."
         );
+
 
         return false;
 
@@ -818,9 +882,9 @@ async function startMusic() {
 }
 
 
-// ======================================================
+// =====================================================
 // STOP MUSIC
-// ======================================================
+// =====================================================
 
 function stopMusic() {
 
@@ -831,19 +895,24 @@ function stopMusic() {
 
     music.pause();
 
-    musicPlaying = false;
+
+    musicPlaying =
+        false;
 
 
     if (musicBtn) {
-        musicBtn.textContent = "🔇";
+
+        musicBtn.textContent =
+            "🔇";
+
     }
 
 }
 
 
-// ======================================================
-// AUTOPLAY TRY
-// ======================================================
+// =====================================================
+// TRY AUTOPLAY
+// =====================================================
 
 window.addEventListener(
     "load",
@@ -855,9 +924,9 @@ window.addEventListener(
 );
 
 
-// ======================================================
-// FIRST CLICK STARTS MUSIC
-// ======================================================
+// =====================================================
+// FIRST INTERACTION STARTS MUSIC
+// =====================================================
 
 async function firstInteraction() {
 
@@ -872,7 +941,9 @@ async function firstInteraction() {
 
 
         if (success) {
+
             removeInteractionListeners();
+
         }
 
     }
@@ -887,10 +958,12 @@ function removeInteractionListeners() {
         firstInteraction
     );
 
+
     document.removeEventListener(
         "keydown",
         firstInteraction
     );
+
 
     document.removeEventListener(
         "touchstart",
@@ -905,10 +978,12 @@ document.addEventListener(
     firstInteraction
 );
 
+
 document.addEventListener(
     "keydown",
     firstInteraction
 );
+
 
 document.addEventListener(
     "touchstart",
@@ -916,11 +991,14 @@ document.addEventListener(
 );
 
 
-// ======================================================
+// =====================================================
 // MUSIC BUTTON
-// ======================================================
+// =====================================================
 
-if (musicBtn && music) {
+if (
+    musicBtn &&
+    music
+) {
 
     musicBtn.addEventListener(
         "click",
@@ -945,9 +1023,9 @@ if (musicBtn && music) {
 }
 
 
-// ======================================================
+// =====================================================
 // THEME
-// ======================================================
+// =====================================================
 
 if (themeBtn) {
 
@@ -957,11 +1035,14 @@ if (themeBtn) {
         );
 
 
-    if (savedTheme === "light") {
+    if (
+        savedTheme === "light"
+    ) {
 
         document.body.classList.add(
             "light"
         );
+
 
         themeBtn.textContent =
             "☀️";
@@ -975,13 +1056,17 @@ if (themeBtn) {
 
             document.body
                 .classList
-                .toggle("light");
+                .toggle(
+                    "light"
+                );
 
 
             const light =
                 document.body
                     .classList
-                    .contains("light");
+                    .contains(
+                        "light"
+                    );
 
 
             themeBtn.textContent =
@@ -1003,11 +1088,14 @@ if (themeBtn) {
 }
 
 
-// ======================================================
+// =====================================================
 // MOBILE MENU
-// ======================================================
+// =====================================================
 
-if (menuBtn && nav) {
+if (
+    menuBtn &&
+    nav
+) {
 
     menuBtn.addEventListener(
         "click",
@@ -1030,31 +1118,36 @@ if (menuBtn && nav) {
 
 
     document
-        .querySelectorAll("nav a")
-        .forEach(link => {
+        .querySelectorAll(
+            "nav a"
+        )
+        .forEach(
+            link => {
 
-            link.addEventListener(
-                "click",
-                () => {
+                link.addEventListener(
+                    "click",
+                    () => {
 
-                    nav.classList.remove(
-                        "active"
-                    );
+                        nav.classList.remove(
+                            "active"
+                        );
 
-                    menuBtn.textContent =
-                        "☰";
 
-                }
-            );
+                        menuBtn.textContent =
+                            "☰";
 
-        });
+                    }
+                );
+
+            }
+        );
 
 }
 
 
-// ======================================================
-// SCROLL REVEAL
-// ======================================================
+// =====================================================
+// REVEAL
+// =====================================================
 
 const revealElements =
     document.querySelectorAll(
@@ -1062,26 +1155,33 @@ const revealElements =
     );
 
 
-if ("IntersectionObserver" in window) {
+if (
+    "IntersectionObserver"
+    in window
+) {
 
     const revealObserver =
         new IntersectionObserver(
 
             entries => {
 
-                entries.forEach(entry => {
+                entries.forEach(
+                    entry => {
 
-                    if (
-                        entry.isIntersecting
-                    ) {
+                        if (
+                            entry.isIntersecting
+                        ) {
 
-                        entry.target
-                            .classList
-                            .add("active");
+                            entry.target
+                                .classList
+                                .add(
+                                    "active"
+                                );
+
+                        }
 
                     }
-
-                });
+                );
 
             },
 
@@ -1117,21 +1217,24 @@ if ("IntersectionObserver" in window) {
 }
 
 
-// ======================================================
+// =====================================================
 // COUNTERS
-// ======================================================
+// =====================================================
 
 const counters =
     document.querySelectorAll(
         "[data-target]"
     );
 
+
 const stats =
     document.querySelector(
         ".stats"
     );
 
-let countersStarted = false;
+
+let countersStarted =
+    false;
 
 
 function startCounters() {
@@ -1140,7 +1243,9 @@ function startCounters() {
         return;
     }
 
-    countersStarted = true;
+
+    countersStarted =
+        true;
 
 
     counters.forEach(
@@ -1152,7 +1257,15 @@ function startCounters() {
                 );
 
 
-            let current = 0;
+            let current =
+                0;
+
+
+            const increment =
+                Math.max(
+                    target / 60,
+                    0.2
+                );
 
 
             const timer =
@@ -1160,17 +1273,17 @@ function startCounters() {
                     () => {
 
                         current +=
-                            Math.max(
-                                target / 60,
-                                0.2
-                            );
+                            increment;
 
 
                         if (
-                            current >= target
+                            current >=
+                            target
                         ) {
 
-                            current = target;
+                            current =
+                                target;
+
 
                             clearInterval(
                                 timer
@@ -1197,10 +1310,11 @@ function startCounters() {
 
 if (
     stats &&
-    "IntersectionObserver" in window
+    "IntersectionObserver"
+    in window
 ) {
 
-    const counterObserver =
+    const observer =
         new IntersectionObserver(
 
             entries => {
@@ -1222,13 +1336,14 @@ if (
             },
 
             {
-                threshold: 0.3
+                threshold:
+                    0.3
             }
 
         );
 
 
-    counterObserver.observe(
+    observer.observe(
         stats
     );
 
@@ -1239,9 +1354,9 @@ if (
 }
 
 
-// ======================================================
-// 3D SYSTEM CARD
-// ======================================================
+// =====================================================
+// 3D CARD
+// =====================================================
 
 if (systemCard) {
 
@@ -1274,16 +1389,26 @@ if (systemCard) {
 
             const rotateY =
                 (
-                    (x - centerX)
-                    / centerX
-                ) * 7;
+                    (
+                        x -
+                        centerX
+                    )
+                    /
+                    centerX
+                )
+                * 7;
 
 
             const rotateX =
                 (
-                    (y - centerY)
-                    / centerY
-                ) * -5;
+                    (
+                        y -
+                        centerY
+                    )
+                    /
+                    centerY
+                )
+                * -5;
 
 
             systemCard.style.transform =
@@ -1316,9 +1441,9 @@ if (systemCard) {
 }
 
 
-// ======================================================
-// CUSTOM CURSOR
-// ======================================================
+// =====================================================
+// CURSOR
+// =====================================================
 
 if (
     cursorDot &&
@@ -1330,19 +1455,23 @@ if (
         event => {
 
             cursorDot.style.left =
-                event.clientX + "px";
+                event.clientX +
+                "px";
 
 
             cursorDot.style.top =
-                event.clientY + "px";
+                event.clientY +
+                "px";
 
 
             cursorCircle.style.left =
-                event.clientX + "px";
+                event.clientX +
+                "px";
 
 
             cursorCircle.style.top =
-                event.clientY + "px";
+                event.clientY +
+                "px";
 
         }
     );
@@ -1350,17 +1479,22 @@ if (
 }
 
 
-// ======================================================
+// =====================================================
 // STARS
-// ======================================================
+// =====================================================
 
 const canvas =
     document.getElementById(
         "stars"
     );
 
-let ctx = null;
-let stars = [];
+
+let ctx =
+    null;
+
+
+let stars =
+    [];
 
 
 if (canvas) {
@@ -1405,12 +1539,15 @@ function createStars() {
 
     const amount =
         Math.min(
+
             250,
+
             Math.floor(
                 canvas.width *
                 canvas.height /
                 7500
             )
+
         );
 
 
@@ -1432,15 +1569,18 @@ function createStars() {
 
             size:
                 Math.random() *
-                1.8 + 0.2,
+                1.8 +
+                0.2,
 
             speed:
                 Math.random() *
-                0.25 + 0.04,
+                0.25 +
+                0.04,
 
             alpha:
                 Math.random() *
-                0.7 + 0.3
+                0.7 +
+                0.3
 
         });
 
@@ -1483,7 +1623,12 @@ function animateStars() {
 
 
             ctx.fillStyle =
-                `rgba(255,255,255,${star.alpha})`;
+                `rgba(
+                    255,
+                    255,
+                    255,
+                    ${star.alpha}
+                )`;
 
 
             ctx.fill();
@@ -1498,7 +1643,9 @@ function animateStars() {
                 canvas.height
             ) {
 
-                star.y = 0;
+                star.y =
+                    0;
+
 
                 star.x =
                     Math.random() *
@@ -1517,7 +1664,10 @@ function animateStars() {
 }
 
 
-if (canvas && ctx) {
+if (
+    canvas &&
+    ctx
+) {
 
     resizeCanvas();
 
@@ -1532,9 +1682,9 @@ if (canvas && ctx) {
 }
 
 
-// ======================================================
-// LAUNCH
-// ======================================================
+// =====================================================
+// LAUNCH SYSTEM
+// =====================================================
 
 if (launchTop) {
 
@@ -1562,7 +1712,9 @@ function launchSystem() {
 
         launchMessage
             .classList
-            .add("show");
+            .add(
+                "show"
+            );
 
     }
 
@@ -1580,9 +1732,11 @@ function launchSystem() {
 
         launchBox.scrollIntoView({
 
-            behavior: "smooth",
+            behavior:
+                "smooth",
 
-            block: "center"
+            block:
+                "center"
 
         });
 
@@ -1591,17 +1745,19 @@ function launchSystem() {
 }
 
 
-// ======================================================
+// =====================================================
 // PARTICLES
-// ======================================================
+// =====================================================
 
 function createParticles() {
 
     const colors = [
+
         "#795cff",
         "#00dcff",
         "#ff4fc8",
         "#ffffff"
+
     ];
 
 
@@ -1619,7 +1775,8 @@ function createParticles() {
 
         const size =
             Math.random() *
-            7 + 3;
+            7 +
+            3;
 
 
         particle.style.position =
@@ -1635,11 +1792,13 @@ function createParticles() {
 
 
         particle.style.width =
-            size + "px";
+            size +
+            "px";
 
 
         particle.style.height =
-            size + "px";
+            size +
+            "px";
 
 
         particle.style.borderRadius =
@@ -1672,41 +1831,54 @@ function createParticles() {
             (
                 Math.random() -
                 0.5
-            ) * 700;
+            )
+            * 700;
 
 
         const y =
             (
                 Math.random() -
                 0.5
-            ) * 700;
+            )
+            * 700;
 
 
         particle.animate(
 
             [
+
                 {
+
                     transform:
                         "translate(0,0) scale(1)",
 
-                    opacity: 1
+                    opacity:
+                        1
+
                 },
 
                 {
+
                     transform:
                         `translate(${x}px,${y}px) scale(0)`,
 
-                    opacity: 0
+                    opacity:
+                        0
+
                 }
+
             ],
 
             {
+
                 duration:
                     Math.random() *
-                    900 + 900,
+                    900 +
+                    900,
 
                 easing:
                     "ease-out"
+
             }
 
         );
@@ -1727,51 +1899,29 @@ function createParticles() {
 }
 
 
-// ======================================================
+// =====================================================
 // PROJECT BUTTON EFFECT
-// ======================================================
+// =====================================================
 
 document
     .querySelectorAll(
         ".project-btn"
     )
-    .forEach(button => {
+    .forEach(
+        button => {
 
-        button.addEventListener(
-            "click",
-            createParticles
-        );
+            button.addEventListener(
+                "click",
+                createParticles
+            );
 
-    });
-
-
-// ======================================================
-// HEADER SCROLL
-// ======================================================
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        if (!header) {
-            return;
         }
+    );
 
 
-        header.style.boxShadow =
-            window.scrollY > 50
-
-                ? "0 20px 60px rgba(0,0,0,0.45)"
-
-                : "0 20px 50px rgba(0,0,0,0.25)";
-
-    }
-);
-
-
-// ======================================================
+// =====================================================
 // MUSIC EVENTS
-// ======================================================
+// =====================================================
 
 if (music) {
 
@@ -1779,7 +1929,8 @@ if (music) {
         "playing",
         () => {
 
-            musicPlaying = true;
+            musicPlaying =
+                true;
 
 
             if (musicBtn) {
@@ -1797,7 +1948,8 @@ if (music) {
         "pause",
         () => {
 
-            musicPlaying = false;
+            musicPlaying =
+                false;
 
         }
     );
@@ -1808,7 +1960,7 @@ if (music) {
         () => {
 
             console.error(
-                "❌ music.mp3 не знайдено!"
+                "music.mp3 not found"
             );
 
 
@@ -1825,10 +1977,6 @@ if (music) {
 }
 
 
-// ======================================================
-// READY
-// ======================================================
-
 console.log(
-    "✅ NEON SPACE SCRIPT LOADED"
+    "✅ NEON SPACE ONLINE"
 );
