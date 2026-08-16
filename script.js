@@ -1,13 +1,87 @@
 // ======================================
-// LOADING SCREEN
+// ELEMENTS
 // ======================================
 
-window.addEventListener("load", () => {
+const loader = document.getElementById("loader");
 
+const menuBtn = document.getElementById("menuBtn");
+const nav = document.getElementById("nav");
+
+const themeBtn = document.getElementById("themeBtn");
+
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
+
+const launchTop = document.getElementById("launchTop");
+const launchBtn = document.getElementById("launchBtn");
+const launchMessage = document.getElementById("launchMessage");
+
+const systemCard = document.getElementById("systemCard");
+
+const cursorDot = document.querySelector(".cursor-dot");
+const cursorCircle = document.querySelector(".cursor-circle");
+
+const header = document.querySelector(".header");
+
+
+// ======================================
+// MUSIC
+// ======================================
+
+let musicPlaying = false;
+
+
+// Гучність музики
+if (music) {
+    music.volume = 0.5;
+}
+
+
+// ======================================
+// START MUSIC
+// ======================================
+
+async function startMusic() {
+
+    if (!music) {
+        return;
+    }
+
+    try {
+
+        await music.play();
+
+        musicPlaying = true;
+
+        if (musicBtn) {
+            musicBtn.textContent = "🔊";
+        }
+
+        console.log("Музика запущена.");
+
+    } catch (error) {
+
+        console.log(
+            "Автозапуск музики заблокований браузером."
+        );
+
+    }
+
+}
+
+
+// ======================================
+// LOADING SCREEN + AUTOPLAY MUSIC
+// ======================================
+
+window.addEventListener("load", async () => {
+
+    // Одразу пробуємо запустити музику
+    await startMusic();
+
+
+    // Прибираємо loading screen
     setTimeout(() => {
-
-        const loader =
-            document.getElementById("loader");
 
         if (loader) {
             loader.classList.add("hide");
@@ -18,17 +92,84 @@ window.addEventListener("load", () => {
 });
 
 
+// ======================================
+// MUSIC AFTER FIRST CLICK
+// ======================================
+
+// Якщо Chrome / Edge заблокував autoplay,
+// музика ввімкнеться після першого кліку.
+
+document.addEventListener(
+    "click",
+    async () => {
+
+        if (
+            music &&
+            music.paused &&
+            !musicPlaying
+        ) {
+
+            await startMusic();
+
+        }
+
+    },
+    {
+        once: true
+    }
+);
+
+
+// ======================================
+// MUSIC BUTTON
+// ======================================
+
+if (musicBtn && music) {
+
+    musicBtn.addEventListener(
+        "click",
+        async (event) => {
+
+            event.stopPropagation();
+
+
+            if (music.paused) {
+
+                try {
+
+                    await music.play();
+
+                    musicPlaying = true;
+
+                    musicBtn.textContent = "🔊";
+
+                } catch (error) {
+
+                    alert(
+                        "Не вдалося запустити музику. Перевір файл music.mp3."
+                    );
+
+                }
+
+            } else {
+
+                music.pause();
+
+                musicPlaying = false;
+
+                musicBtn.textContent = "🔇";
+
+            }
+
+        }
+    );
+
+}
+
 
 // ======================================
 // MOBILE MENU
 // ======================================
-
-const menuBtn =
-    document.getElementById("menuBtn");
-
-const nav =
-    document.getElementById("nav");
-
 
 if (menuBtn && nav) {
 
@@ -36,24 +177,18 @@ if (menuBtn && nav) {
         "click",
         () => {
 
-            nav.classList.toggle(
-                "active"
-            );
+            nav.classList.toggle("active");
 
 
             if (
-                nav.classList.contains(
-                    "active"
-                )
+                nav.classList.contains("active")
             ) {
 
-                menuBtn.textContent =
-                    "✕";
+                menuBtn.textContent = "✕";
 
             } else {
 
-                menuBtn.textContent =
-                    "☰";
+                menuBtn.textContent = "☰";
 
             }
 
@@ -69,12 +204,9 @@ if (menuBtn && nav) {
                 "click",
                 () => {
 
-                    nav.classList.remove(
-                        "active"
-                    );
+                    nav.classList.remove("active");
 
-                    menuBtn.textContent =
-                        "☰";
+                    menuBtn.textContent = "☰";
 
                 }
             );
@@ -84,16 +216,9 @@ if (menuBtn && nav) {
 }
 
 
-
 // ======================================
-// DARK / LIGHT THEME
+// DARK / LIGHT MODE
 // ======================================
-
-const themeBtn =
-    document.getElementById(
-        "themeBtn"
-    );
-
 
 if (themeBtn) {
 
@@ -101,24 +226,18 @@ if (themeBtn) {
         "click",
         () => {
 
-            document.body
-                .classList
-                .toggle("light");
+            document.body.classList.toggle("light");
 
 
             if (
-                document.body
-                    .classList
-                    .contains("light")
+                document.body.classList.contains("light")
             ) {
 
-                themeBtn.textContent =
-                    "☀️";
+                themeBtn.textContent = "☀️";
 
             } else {
 
-                themeBtn.textContent =
-                    "🌙";
+                themeBtn.textContent = "🌙";
 
             }
 
@@ -126,77 +245,14 @@ if (themeBtn) {
     );
 
 }
-
-
-
-// ======================================
-// MUSIC
-// ======================================
-
-const music =
-    document.getElementById(
-        "music"
-    );
-
-const musicBtn =
-    document.getElementById(
-        "musicBtn"
-    );
-
-let musicPlaying = false;
-
-
-if (music && musicBtn) {
-
-    musicBtn.addEventListener(
-        "click",
-        async () => {
-
-            if (!musicPlaying) {
-
-                try {
-
-                    await music.play();
-
-                    musicPlaying = true;
-
-                    musicBtn.textContent =
-                        "🔊";
-
-                } catch (error) {
-
-                    alert(
-                        "Додай файл music.mp3 у ту саму папку, де index.html."
-                    );
-
-                }
-
-            } else {
-
-                music.pause();
-
-                musicPlaying = false;
-
-                musicBtn.textContent =
-                    "🎵";
-
-            }
-
-        }
-    );
-
-}
-
 
 
 // ======================================
 // SCROLL REVEAL
 // ======================================
 
-const reveals =
-    document.querySelectorAll(
-        ".reveal"
-    );
+const revealElements =
+    document.querySelectorAll(".reveal");
 
 
 const revealObserver =
@@ -204,21 +260,15 @@ const revealObserver =
 
         entries => {
 
-            entries.forEach(
-                entry => {
+            entries.forEach(entry => {
 
-                    if (
-                        entry.isIntersecting
-                    ) {
+                if (entry.isIntersecting) {
 
-                        entry.target
-                            .classList
-                            .add("active");
-
-                    }
+                    entry.target.classList.add("active");
 
                 }
-            );
+
+            });
 
         },
 
@@ -229,16 +279,11 @@ const revealObserver =
     );
 
 
-reveals.forEach(
-    element => {
+revealElements.forEach(element => {
 
-        revealObserver.observe(
-            element
-        );
+    revealObserver.observe(element);
 
-    }
-);
-
+});
 
 
 // ======================================
@@ -246,17 +291,12 @@ reveals.forEach(
 // ======================================
 
 const counters =
-    document.querySelectorAll(
-        "[data-target]"
-    );
+    document.querySelectorAll("[data-target]");
 
 const stats =
-    document.querySelector(
-        ".stats"
-    );
+    document.querySelector(".stats");
 
-let countersStarted =
-    false;
+let countersStarted = false;
 
 
 const counterObserver =
@@ -264,82 +304,67 @@ const counterObserver =
 
         entries => {
 
-            entries.forEach(
-                entry => {
+            entries.forEach(entry => {
 
-                    if (
-                        !entry.isIntersecting ||
-                        countersStarted
-                    ) {
-                        return;
-                    }
+                if (
+                    !entry.isIntersecting ||
+                    countersStarted
+                ) {
 
-
-                    countersStarted =
-                        true;
-
-
-                    counters.forEach(
-                        counter => {
-
-                            const target =
-                                Number(
-                                    counter
-                                        .dataset
-                                        .target
-                                );
-
-
-                            let current =
-                                0;
-
-
-                            const increment =
-                                Math.max(
-                                    target / 60,
-                                    0.2
-                                );
-
-
-                            const timer =
-                                setInterval(
-                                    () => {
-
-                                        current +=
-                                            increment;
-
-
-                                        if (
-                                            current >=
-                                            target
-                                        ) {
-
-                                            current =
-                                                target;
-
-                                            clearInterval(
-                                                timer
-                                            );
-
-                                        }
-
-
-                                        counter
-                                            .textContent =
-                                            Math.floor(
-                                                current
-                                            );
-
-                                    },
-
-                                    20
-                                );
-
-                        }
-                    );
+                    return;
 
                 }
-            );
+
+
+                countersStarted = true;
+
+
+                counters.forEach(counter => {
+
+                    const target =
+                        Number(
+                            counter.dataset.target
+                        );
+
+                    let current = 0;
+
+
+                    const increment =
+                        Math.max(
+                            target / 60,
+                            0.2
+                        );
+
+
+                    const timer =
+                        setInterval(
+                            () => {
+
+                                current += increment;
+
+
+                                if (
+                                    current >= target
+                                ) {
+
+                                    current = target;
+
+                                    clearInterval(timer);
+
+                                }
+
+
+                                counter.textContent =
+                                    Math.floor(current);
+
+                            },
+
+                            20
+                        );
+
+                });
+
+            });
 
         },
 
@@ -352,23 +377,14 @@ const counterObserver =
 
 if (stats) {
 
-    counterObserver.observe(
-        stats
-    );
+    counterObserver.observe(stats);
 
 }
-
 
 
 // ======================================
 // 3D SYSTEM CARD
 // ======================================
-
-const systemCard =
-    document.getElementById(
-        "systemCard"
-    );
-
 
 if (systemCard) {
 
@@ -377,23 +393,18 @@ if (systemCard) {
         event => {
 
             const rect =
-                systemCard
-                    .getBoundingClientRect();
+                systemCard.getBoundingClientRect();
 
 
             const mouseX =
-                event.clientX -
-                rect.left;
-
+                event.clientX - rect.left;
 
             const mouseY =
-                event.clientY -
-                rect.top;
+                event.clientY - rect.top;
 
 
             const centerX =
                 rect.width / 2;
-
 
             const centerY =
                 rect.height / 2;
@@ -401,27 +412,19 @@ if (systemCard) {
 
             const rotateY =
                 (
-                    (
-                        mouseX -
-                        centerX
-                    ) /
-                    centerX
+                    (mouseX - centerX)
+                    / centerX
                 ) * 7;
 
 
             const rotateX =
                 (
-                    (
-                        mouseY -
-                        centerY
-                    ) /
-                    centerY
+                    (mouseY - centerY)
+                    / centerY
                 ) * -5;
 
 
-            systemCard
-                .style
-                .transform =
+            systemCard.style.transform =
                 `
                     perspective(900px)
                     rotateX(${rotateX}deg)
@@ -437,9 +440,7 @@ if (systemCard) {
         "mouseleave",
         () => {
 
-            systemCard
-                .style
-                .transform =
+            systemCard.style.transform =
                 `
                     perspective(900px)
                     rotateX(0deg)
@@ -453,58 +454,36 @@ if (systemCard) {
 }
 
 
-
 // ======================================
 // CUSTOM CURSOR
 // ======================================
 
-const cursorDot =
-    document.querySelector(
-        ".cursor-dot"
-    );
-
-const cursorCircle =
-    document.querySelector(
-        ".cursor-circle"
-    );
-
-
-if (
-    cursorDot &&
-    cursorCircle
-) {
+if (cursorDot && cursorCircle) {
 
     document.addEventListener(
         "mousemove",
         event => {
 
             cursorDot.style.left =
-                event.clientX +
-                "px";
-
+                event.clientX + "px";
 
             cursorDot.style.top =
-                event.clientY +
-                "px";
+                event.clientY + "px";
 
 
             cursorCircle.animate(
 
                 {
                     left:
-                        event.clientX +
-                        "px",
+                        event.clientX + "px",
 
                     top:
-                        event.clientY +
-                        "px"
+                        event.clientY + "px"
                 },
 
                 {
                     duration: 350,
-
-                    fill:
-                        "forwards"
+                    fill: "forwards"
                 }
 
             );
@@ -515,16 +494,12 @@ if (
 }
 
 
-
 // ======================================
 // STAR BACKGROUND
 // ======================================
 
 const canvas =
-    document.getElementById(
-        "stars"
-    );
-
+    document.getElementById("stars");
 
 let ctx = null;
 
@@ -533,13 +508,14 @@ let stars = [];
 
 if (canvas) {
 
-    ctx =
-        canvas.getContext(
-            "2d"
-        );
+    ctx = canvas.getContext("2d");
 
 }
 
+
+// ======================================
+// RESIZE CANVAS
+// ======================================
 
 function resizeCanvas() {
 
@@ -551,7 +527,6 @@ function resizeCanvas() {
     canvas.width =
         window.innerWidth;
 
-
     canvas.height =
         window.innerHeight;
 
@@ -561,6 +536,9 @@ function resizeCanvas() {
 }
 
 
+// ======================================
+// CREATE STARS
+// ======================================
 
 function createStars() {
 
@@ -574,11 +552,9 @@ function createStars() {
 
     const amount =
         Math.floor(
-
             canvas.width *
             canvas.height /
             7500
-
         );
 
 
@@ -591,31 +567,31 @@ function createStars() {
         stars.push({
 
             x:
-                Math.random() *
-                canvas.width,
+                Math.random()
+                * canvas.width,
 
             y:
-                Math.random() *
-                canvas.height,
+                Math.random()
+                * canvas.height,
 
             size:
-                Math.random() *
-                1.8 +
-                0.2,
+                Math.random()
+                * 1.8
+                + 0.2,
 
             speed:
-                Math.random() *
-                0.25 +
-                0.04,
+                Math.random()
+                * 0.25
+                + 0.04,
 
             alpha:
-                Math.random() *
-                0.7 +
-                0.3,
+                Math.random()
+                * 0.7
+                + 0.3,
 
             twinkle:
-                Math.random() *
-                0.02
+                Math.random()
+                * 0.02
 
         });
 
@@ -624,6 +600,9 @@ function createStars() {
 }
 
 
+// ======================================
+// ANIMATE STARS
+// ======================================
 
 function animateStars() {
 
@@ -638,82 +617,68 @@ function animateStars() {
 
 
     ctx.clearRect(
-
         0,
         0,
-
         canvas.width,
         canvas.height
-
     );
 
 
-    stars.forEach(
-        star => {
+    stars.forEach(star => {
 
-            star.alpha +=
-                star.twinkle;
+        star.alpha += star.twinkle;
 
 
-            if (
-                star.alpha >= 1 ||
-                star.alpha <= 0.25
-            ) {
+        if (
+            star.alpha >= 1 ||
+            star.alpha <= 0.25
+        ) {
 
-                star.twinkle *=
-                    -1;
-
-            }
-
-
-            ctx.beginPath();
-
-
-            ctx.arc(
-
-                star.x,
-                star.y,
-
-                star.size,
-
-                0,
-
-                Math.PI * 2
-
-            );
-
-
-            ctx.fillStyle =
-                `rgba(
-                    255,
-                    255,
-                    255,
-                    ${star.alpha}
-                )`;
-
-
-            ctx.fill();
-
-
-            star.y +=
-                star.speed;
-
-
-            if (
-                star.y >
-                canvas.height
-            ) {
-
-                star.y = 0;
-
-                star.x =
-                    Math.random() *
-                    canvas.width;
-
-            }
+            star.twinkle *= -1;
 
         }
-    );
+
+
+        ctx.beginPath();
+
+
+        ctx.arc(
+            star.x,
+            star.y,
+            star.size,
+            0,
+            Math.PI * 2
+        );
+
+
+        ctx.fillStyle =
+            `rgba(
+                255,
+                255,
+                255,
+                ${star.alpha}
+            )`;
+
+
+        ctx.fill();
+
+
+        star.y += star.speed;
+
+
+        if (
+            star.y > canvas.height
+        ) {
+
+            star.y = 0;
+
+            star.x =
+                Math.random()
+                * canvas.width;
+
+        }
+
+    });
 
 
     requestAnimationFrame(
@@ -734,26 +699,9 @@ resizeCanvas();
 animateStars();
 
 
-
 // ======================================
 // LAUNCH SYSTEM
 // ======================================
-
-const launchTop =
-    document.getElementById(
-        "launchTop"
-    );
-
-const launchBtn =
-    document.getElementById(
-        "launchBtn"
-    );
-
-const launchMessage =
-    document.getElementById(
-        "launchMessage"
-    );
-
 
 if (launchTop) {
 
@@ -775,14 +723,13 @@ if (launchBtn) {
 }
 
 
-
 function launchSystem() {
 
     if (launchMessage) {
 
-        launchMessage
-            .classList
-            .add("show");
+        launchMessage.classList.add(
+            "show"
+        );
 
     }
 
@@ -808,11 +755,9 @@ function launchSystem() {
 
         launchBox.scrollIntoView({
 
-            behavior:
-                "smooth",
+            behavior: "smooth",
 
-            block:
-                "center"
+            block: "center"
 
         });
 
@@ -821,9 +766,8 @@ function launchSystem() {
 }
 
 
-
 // ======================================
-// PARTICLE EFFECT
+// PARTICLES
 // ======================================
 
 function createParticles() {
@@ -831,11 +775,8 @@ function createParticles() {
     const colors = [
 
         "#795cff",
-
         "#00dcff",
-
         "#ff4fc8",
-
         "#ffffff"
 
     ];
@@ -848,77 +789,61 @@ function createParticles() {
     ) {
 
         const particle =
-            document
-                .createElement(
-                    "div"
-                );
+            document.createElement("div");
 
 
-        particle.style
-            .position =
+        particle.style.position =
             "fixed";
 
 
-        particle.style
-            .left =
+        particle.style.left =
             "50%";
 
 
-        particle.style
-            .top =
+        particle.style.top =
             "50%";
 
 
         const size =
-            Math.random() *
-            7 +
-            3;
+            Math.random() * 7 + 3;
 
 
         particle.style.width =
-            size +
-            "px";
+            size + "px";
 
 
         particle.style.height =
-            size +
-            "px";
+            size + "px";
 
 
-        particle.style
-            .borderRadius =
+        particle.style.borderRadius =
             "50%";
 
 
-        particle.style
-            .pointerEvents =
+        particle.style.pointerEvents =
             "none";
 
 
-        particle.style
-            .zIndex =
+        particle.style.zIndex =
             "9999";
 
 
-        particle.style
-            .boxShadow =
-            "0 0 15px currentColor";
-
-
-        particle.style
-            .background =
+        particle.style.background =
             colors[
                 Math.floor(
-                    Math.random() *
-                    colors.length
+                    Math.random()
+                    * colors.length
                 )
             ];
 
 
-        document.body
-            .appendChild(
-                particle
-            );
+        particle.style.boxShadow =
+            "0 0 15px currentColor";
+
+
+        document.body.appendChild(
+            particle
+        );
 
 
         const x =
@@ -940,44 +865,35 @@ function createParticles() {
             [
 
                 {
-
                     transform:
                         "translate(0, 0) scale(1)",
 
-                    opacity:
-                        1
-
+                    opacity: 1
                 },
 
                 {
-
                     transform:
                         `translate(${x}px, ${y}px) scale(0)`,
 
-                    opacity:
-                        0
-
+                    opacity: 0
                 }
 
             ],
 
             {
-
                 duration:
-                    Math.random() *
-                    900 +
-                    900,
+                    Math.random()
+                    * 900
+                    + 900,
 
                 easing:
                     "ease-out"
-
             }
 
         );
 
 
         setTimeout(
-
             () => {
 
                 particle.remove();
@@ -985,7 +901,6 @@ function createParticles() {
             },
 
             2000
-
         );
 
     }
@@ -993,16 +908,9 @@ function createParticles() {
 }
 
 
-
 // ======================================
 // HEADER SCROLL EFFECT
 // ======================================
-
-const header =
-    document.querySelector(
-        ".header"
-    );
-
 
 window.addEventListener(
     "scroll",
@@ -1014,24 +922,21 @@ window.addEventListener(
 
 
         if (
-            window.scrollY >
-            50
+            window.scrollY > 50
         ) {
 
-            header.style
-                .boxShadow =
+            header.style.boxShadow =
                 `
                     0 20px 60px
-                    rgba(0,0,0,0.45)
+                    rgba(0, 0, 0, 0.45)
                 `;
 
         } else {
 
-            header.style
-                .boxShadow =
+            header.style.boxShadow =
                 `
                     0 20px 50px
-                    rgba(0,0,0,0.25)
+                    rgba(0, 0, 0, 0.25)
                 `;
 
         }
@@ -1040,15 +945,12 @@ window.addEventListener(
 );
 
 
-
 // ======================================
-// PROJECT CARD MOUSE EFFECT
+// PROJECT CARD EFFECT
 // ======================================
 
 document
-    .querySelectorAll(
-        ".project"
-    )
+    .querySelectorAll(".project")
     .forEach(card => {
 
         card.addEventListener(
@@ -1056,8 +958,7 @@ document
             event => {
 
                 const rect =
-                    card
-                        .getBoundingClientRect();
+                    card.getBoundingClientRect();
 
 
                 const x =
@@ -1070,14 +971,13 @@ document
                     rect.top;
 
 
-                card.style
-                    .background =
+                card.style.background =
                     `
                         radial-gradient(
                             circle at
                             ${x}px
                             ${y}px,
-                            rgba(120,90,255,0.14),
+                            rgba(120, 90, 255, 0.14),
                             var(--panel)
                         )
                     `;
@@ -1090,11 +990,44 @@ document
             "mouseleave",
             () => {
 
-                card.style
-                    .background =
+                card.style.background =
                     "var(--panel)";
 
             }
         );
 
     });
+
+
+// ======================================
+// PROJECT BUTTON CLICK EFFECT
+// ======================================
+
+document
+    .querySelectorAll(".project-btn")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                createParticles();
+
+            }
+        );
+
+    });
+
+
+// ======================================
+// CONSOLE
+// ======================================
+
+console.log(
+    "%c NEON SPACE ONLINE ",
+    "background:#7455ff;color:white;font-size:20px;padding:10px;border-radius:8px;"
+);
+
+console.log(
+    "Created by Nazar 🚀"
+);
