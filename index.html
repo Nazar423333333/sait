@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>NEON SPACE — Nazar</title>
 
@@ -11,49 +16,81 @@
         content="NEON SPACE — сайт проєктів Nazar"
     >
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
+
 
 <body>
 
-    <!-- =========================
+
+    <!-- =====================================
          LOADING SCREEN
-    ========================== -->
+    ====================================== -->
+
     <div id="loader">
 
-        <h1>NEON SPACE</h1>
+        <h1>
+            NEON SPACE
+        </h1>
+
 
         <div class="loader-line">
+
             <div class="loader-progress"></div>
+
         </div>
 
-        <p>ЗАПУСК СИСТЕМИ...</p>
+
+        <p>
+            ЗАПУСК СИСТЕМИ...
+        </p>
 
     </div>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          STAR BACKGROUND
-    ========================== -->
+    ====================================== -->
+
     <canvas id="stars"></canvas>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          CUSTOM CURSOR
-    ========================== -->
+    ====================================== -->
+
     <div class="cursor-dot"></div>
+
     <div class="cursor-circle"></div>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          HEADER
-    ========================== -->
+    ====================================== -->
+
     <header class="header">
 
-        <a href="#home" class="logo">
+
+        <!-- LOGO -->
+
+        <a
+            href="#home"
+            class="logo"
+        >
+
             ◆ NEON<span>SPACE</span>
+
         </a>
 
+
+
+        <!-- NAVIGATION -->
 
         <nav id="nav">
 
@@ -76,380 +113,619 @@
         </nav>
 
 
+
+        <!-- HEADER BUTTONS -->
+
         <div class="header-buttons">
+
+
+            <!-- MUSIC -->
 
             <button
                 id="musicBtn"
+                type="button"
                 title="Музика"
+                aria-label="Музика"
             >
                 🎵
             </button>
 
+
+            <!-- THEME -->
+
             <button
                 id="themeBtn"
-                title="Тема"
+                type="button"
+                title="Змінити тему"
+                aria-label="Змінити тему"
             >
                 🌙
             </button>
 
+
+            <!-- MOBILE MENU -->
+
             <button
                 id="menuBtn"
+                type="button"
                 title="Меню"
+                aria-label="Меню"
             >
                 ☰
             </button>
+
 
         </div>
 
     </header>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          MAIN
-    ========================== -->
+    ====================================== -->
+
     <main>
 
 
-        <!-- =====================
-             HERO
-        ====================== -->
-        <section class="hero" id="home">
 
+        <!-- =================================
+             HERO
+        ================================== -->
+
+        <section
+            class="hero"
+            id="home"
+        >
+
+
+            <!-- HERO LEFT -->
 
             <div class="hero-content reveal">
 
+
                 <div class="badge">
+
                     ✦ NAZAR DIGITAL EXPERIENCE
+
                 </div>
 
 
+
                 <h1>
-                    ЛАСКАВО<br>
+
+                    ЛАСКАВО
+
+                    <br>
 
                     <span class="gradient-text">
+
                         В NEON SPACE
+
                     </span>
+
                 </h1>
 
 
+
                 <p>
+
                     Мій сучасний сайт із неоновим дизайном,
-                    зоряним фоном, 3D-анімаціями та
-                    моїми іграми й програмами.
+                    зоряним фоном, 3D-анімаціями,
+                    музикою та моїми іграми й програмами.
+
                 </p>
 
 
+
+                <!-- HERO BUTTONS -->
+
                 <div class="hero-buttons">
+
 
                     <a
                         href="#projects"
                         class="btn primary"
                     >
+
                         🚀 МОЇ ПРОЄКТИ
+
                     </a>
+
 
 
                     <button
                         class="btn secondary"
                         id="launchTop"
+                        type="button"
                     >
+
                         ⚡ ЗАПУСТИТИ
+
                     </button>
+
 
                 </div>
 
 
+
+                <!-- STATS -->
+
                 <div class="stats">
+
 
                     <div>
 
                         <strong data-target="3">
+
                             0
+
                         </strong>
 
                         <span>
+
                             МОЇ ПРОЄКТИ
+
                         </span>
 
                     </div>
+
 
 
                     <div>
 
                         <strong data-target="99">
+
                             0
+
                         </strong>
 
                         <span>
+
                             % POWER
+
                         </span>
 
                     </div>
+
 
 
                     <div>
 
                         <strong data-target="24">
+
                             0
+
                         </strong>
 
                         <span>
+
                             /7 ONLINE
+
                         </span>
 
                     </div>
 
+
                 </div>
+
 
             </div>
 
 
-            <!-- SYSTEM CARD -->
+
+            <!-- =================================
+                 SYSTEM CARD
+            ================================== -->
+
             <div
                 class="system-card reveal"
                 id="systemCard"
             >
 
+
+                <!-- WINDOW BAR -->
+
                 <div class="window-bar">
+
 
                     <div>
 
                         <span class="dot red"></span>
+
                         <span class="dot yellow"></span>
+
                         <span class="dot green"></span>
 
                     </div>
 
 
+
                     <span class="window-title">
+
                         NAZAR CORE
+
                     </span>
+
 
                 </div>
 
+
+
+                <!-- CORE -->
 
                 <div class="core">
 
+
                     <div class="orbit orbit1"></div>
+
                     <div class="orbit orbit2"></div>
+
                     <div class="orbit orbit3"></div>
 
+
+
                     <div class="core-ball">
+
                         N
+
                     </div>
+
 
                 </div>
 
+
+
+                <!-- SYSTEM INFO -->
 
                 <div class="system-info">
 
+
                     <div>
 
                         <span>
+
                             STATUS
+
                         </span>
+
 
                         <strong class="online">
+
                             ONLINE
+
                         </strong>
 
                     </div>
+
 
 
                     <div>
 
                         <span>
+
                             CORE POWER
+
                         </span>
 
+
                         <strong>
+
                             99%
+
                         </strong>
 
                     </div>
+
 
 
                     <div class="progress">
+
                         <div class="progress-fill"></div>
+
                     </div>
+
 
                 </div>
 
+
             </div>
+
 
         </section>
 
 
 
-        <!-- =====================
+        <!-- =================================
              FEATURES
-        ====================== -->
+        ================================== -->
+
         <section
             class="section"
             id="features"
         >
 
+
             <div class="section-title reveal">
 
+
                 <span>
+
                     МОЖЛИВОСТІ
+
                 </span>
 
+
+
                 <h2>
+
                     Сайт нового
+
                     <span class="gradient-text">
+
                         покоління
+
                     </span>
+
                 </h2>
 
+
+
                 <p>
-                    Анімації, неон, музика та мої проєкти
+
+                    Неоновий дизайн, анімації,
+                    музика та мої проєкти
                     в одному місці.
+
                 </p>
+
 
             </div>
 
+
+
+            <!-- FEATURES GRID -->
 
             <div class="feature-grid">
 
 
+
+                <!-- FEATURE 1 -->
+
                 <div class="feature reveal">
 
+
                     <div class="feature-icon">
+
                         ⚡
+
                     </div>
 
+
                     <h3>
+
                         Ultra Speed
+
                     </h3>
 
+
                     <p>
+
                         Швидкий сайт із плавними
                         переходами та ефектами.
+
                     </p>
+
 
                 </div>
 
 
+
+                <!-- FEATURE 2 -->
+
                 <div class="feature reveal">
 
+
                     <div class="feature-icon">
+
                         🌌
+
                     </div>
 
+
                     <h3>
+
                         Space Design
+
                     </h3>
 
+
                     <p>
+
                         Живий зоряний фон,
-                        неон і космічний дизайн.
+                        неонові кольори
+                        та космічний дизайн.
+
                     </p>
+
 
                 </div>
 
 
+
+                <!-- FEATURE 3 -->
+
                 <div class="feature reveal">
 
+
                     <div class="feature-icon">
+
                         📱
+
                     </div>
 
+
                     <h3>
+
                         Responsive
+
                     </h3>
 
+
                     <p>
-                        Працює на комп'ютері,
-                        телефоні та планшеті.
+
+                        Сайт адаптований
+                        для комп'ютера,
+                        телефону та планшета.
+
                     </p>
+
 
                 </div>
 
+
+
+                <!-- FEATURE 4 -->
 
                 <div class="feature reveal">
 
+
                     <div class="feature-icon">
-                        ✨
+
+                        🎵
+
                     </div>
 
+
                     <h3>
-                        Animations
+
+                        Music
+
                     </h3>
 
+
                     <p>
-                        Красиві анімації під час
-                        прокручування сторінки.
+
+                        Фонова музика
+                        та кнопка керування
+                        звуком.
+
                     </p>
 
+
                 </div>
+
 
             </div>
+
 
         </section>
 
 
 
-        <!-- =====================
+        <!-- =================================
              PROJECTS
-        ====================== -->
+        ================================== -->
+
         <section
             class="section"
             id="projects"
         >
 
+
+            <!-- TITLE -->
+
             <div class="section-title reveal">
 
+
                 <span>
+
                     МОЇ САЙТИ
+
                 </span>
 
 
+
                 <h2>
+
                     Мої
+
                     <span class="gradient-text">
+
                         проєкти
+
                     </span>
+
                 </h2>
 
 
+
                 <p>
-                    Натискай кнопку та відкривай проєкт.
+
+                    Натискай кнопку
+                    та відкривай потрібний проєкт.
+
                 </p>
+
 
             </div>
 
 
+
+            <!-- PROJECT GRID -->
+
             <div class="projects-grid">
 
 
-                <!-- FNAF -->
+
+                <!-- =================================
+                     FNAF
+                ================================== -->
+
                 <article class="project reveal">
+
 
                     <div class="project-image fnaf-image">
 
+
                         <span>
+
                             👻
+
                         </span>
+
 
                     </div>
 
 
+
                     <div class="project-content">
 
+
                         <div class="project-tag">
+
                             🎮 GAME
+
                         </div>
 
+
+
                         <h3>
+
                             П'ЯТЬ НОЧЕЙ В АТБ
+
                         </h3>
 
+
+
                         <p>
+
                             Моя FNAF-подібна гра,
-                            яку можна запустити прямо
-                            у браузері.
+                            яку можна запускати
+                            прямо у браузері.
+
                         </p>
+
 
 
                         <a
@@ -458,42 +734,73 @@
                             rel="noopener noreferrer"
                             class="project-btn"
                         >
+
                             🎮 ГРАТИ ЗАРАЗ
-                            <span>→</span>
+
+                            <span>
+
+                                →
+
+                            </span>
+
                         </a>
 
+
                     </div>
+
 
                 </article>
 
 
 
-                <!-- OPTIMIZER -->
+                <!-- =================================
+                     OPTIMIZER
+                ================================== -->
+
                 <article class="project reveal">
+
 
                     <div class="project-image optimizer-image">
 
+
                         <span>
+
                             🚀
+
                         </span>
+
 
                     </div>
 
 
+
                     <div class="project-content">
 
+
                         <div class="project-tag">
+
                             🖥️ WINDOWS
+
                         </div>
 
+
+
                         <h3>
+
                             Windows Optimizer
+
                         </h3>
 
+
+
                         <p>
-                            Сайт мого проєкту
-                            Windows Optimizer.
+
+                            Сторінка мого
+                            Windows Optimizer
+                            для Windows.
+
                         </p>
+
 
 
                         <a
@@ -502,42 +809,73 @@
                             rel="noopener noreferrer"
                             class="project-btn"
                         >
+
                             🚀 ВІДКРИТИ
-                            <span>→</span>
+
+                            <span>
+
+                                →
+
+                            </span>
+
                         </a>
 
+
                     </div>
+
 
                 </article>
 
 
 
-                <!-- SUPER GAME -->
+                <!-- =================================
+                     SUPER GAME
+                ================================== -->
+
                 <article class="project reveal">
+
 
                     <div class="project-image game-image">
 
+
                         <span>
+
                             🎮
+
                         </span>
+
 
                     </div>
 
 
+
                     <div class="project-content">
 
+
                         <div class="project-tag">
+
                             ⚡ ONLINE GAME
+
                         </div>
 
+
+
                         <h3>
+
                             SUPER GAME НАЗАРА
+
                         </h3>
 
+
+
                         <p>
+
                             Моя браузерна гра
-                            з ігровими функціями.
+                            з ігровими функціями
+                            та системою прогресу.
+
                         </p>
+
 
 
                         <a
@@ -546,110 +884,173 @@
                             rel="noopener noreferrer"
                             class="project-btn"
                         >
+
                             ⚡ ЗАПУСТИТИ ГРУ
-                            <span>→</span>
+
+                            <span>
+
+                                →
+
+                            </span>
+
                         </a>
 
+
                     </div>
+
 
                 </article>
 
 
             </div>
 
+
         </section>
 
 
 
-        <!-- =====================
+        <!-- =================================
              PROFILE
-        ====================== -->
+        ================================== -->
+
         <section
             class="section"
             id="profile"
         >
 
+
             <div class="profile reveal">
 
 
+                <!-- AVATAR -->
+
                 <div class="avatar">
+
                     N
+
                 </div>
 
+
+
+                <!-- INFO -->
 
                 <div class="profile-info">
 
+
                     <span>
+
                         CREATOR PROFILE
+
                     </span>
 
 
+
                     <h2>
+
                         Nazar
+
                     </h2>
 
 
+
                     <p>
+
                         Web Developer • Game Creator • PC Enthusiast
+
                     </p>
 
 
+
                     <div class="profile-online">
+
+
                         <span class="online-dot"></span>
+
+
                         ONLINE
+
+
                     </div>
+
 
                 </div>
 
+
+
+                <!-- BUTTON -->
 
                 <a
                     href="#projects"
                     class="btn primary"
                 >
+
                     🚀 МОЇ ПРОЄКТИ
+
                 </a>
 
+
             </div>
+
 
         </section>
 
 
 
-        <!-- =====================
-             LAUNCH
-        ====================== -->
+        <!-- =================================
+             LAUNCH SECTION
+        ================================== -->
+
         <section class="section">
+
 
             <div class="launch-box reveal">
 
+
                 <span class="launch-label">
+
                     NEON SYSTEM
+
                 </span>
 
 
+
                 <h2>
+
                     Готовий до запуску?
+
                 </h2>
 
 
+
                 <p>
+
                     Активуй систему NEON SPACE.
+
                 </p>
+
 
 
                 <button
                     id="launchBtn"
                     class="btn primary"
+                    type="button"
                 >
+
                     🚀 LAUNCH
+
                 </button>
 
 
+
                 <div id="launchMessage">
+
                     ✅ SYSTEM ONLINE
+
                 </div>
 
+
             </div>
+
 
         </section>
 
@@ -658,41 +1059,59 @@
 
 
 
-    <!-- =========================
+    <!-- =====================================
          FOOTER
-    ========================== -->
+    ====================================== -->
+
     <footer>
 
+
         <strong>
+
             ◆ NEON SPACE
+
         </strong>
 
+
         <span>
+
             Created by Nazar • © 2026
+
         </span>
+
 
     </footer>
 
 
 
-    <!-- =========================
+    <!-- =====================================
          MUSIC
-    ========================== -->
-    <audio id="music" loop>
+    ====================================== -->
+
+    <audio
+        id="music"
+        loop
+        preload="auto"
+    >
 
         <source
             src="music.mp3"
             type="audio/mpeg"
         >
 
+        Ваш браузер не підтримує аудіо.
+
     </audio>
 
 
 
-    <!-- =========================
+    <!-- =====================================
          JAVASCRIPT
-    ========================== -->
+    ====================================== -->
+
     <script src="script.js"></script>
 
+
 </body>
+
 </html>
